@@ -1,0 +1,25 @@
+{
+  "_说明": "带 AI 面板的场景模板：在最小示例基础上加了 type=harness 的 AI 面板。三个绑定字段必须换成**真实存在**的值，否则面板不钉会话（见 02-会话定位与跟随/二-会话绑定三字段.md）：sessionTitle = 会话完整真实标题（完全相等）；sessionId = 引擎会话 id，形如 session-xxxxxxxx-…；pinTarget = 候选名数组（按顺序匹配，忽略大小写与空格）。面板 id 只允许字母数字下划线短横（它同时是浏览器分区名的一部分）。",
+
+  "id": "demo-ai",
+  "name": "<场景名>",
+  "description": "<一句话说明>",
+
+  "cols": 4,
+  "panels": [
+    { "id": "demo-main", "title": "主视图", "type": "view", "col": 1, "row": 1, "w": 3, "h": 2 },
+    { "id": "demo-side", "title": "文件",   "type": "file", "col": 4, "row": 1, "w": 1, "h": 2 },
+
+    {
+      "id": "demo-ai",
+      "title": "AI·<场景名>",
+      "type": "harness",
+
+      "sessionTitle": "<会话完整真实标题>",
+      "sessionId": "session-00000000-0000-0000-0000-000000000000",
+      "pinTarget": ["<会话名>", "<会话名简写>"],
+
+      "col": 1, "row": 3, "w": 4, "h": 2
+    }
+  ]
+}
