@@ -1101,9 +1101,9 @@ renderers['site-about'] = (body, meta, head) => {
 renderers['site-media'] = (body, meta, head) => {
   body.classList.add('site-media');
   const MEDIA = [
-    { name: '哔哩哔哩', handle: '@<机主>', emoji: '📺', url: 'https://space.bilibili.com/96822050', qr: '/账号二维码/哔哩哔哩.jpg' },
-    { name: '抖音', handle: '@<机主>（蛋炒饭里悟真我）', emoji: '🎵', url: 'https://www.douyin.com/user/MS4wLjABAAAAV55NIdPri0csj-Gwi0vT4Yuuest0zIvnTZGxe2K3YAXuESpAombXp397aY98jDq-', qr: '/账号二维码/抖音.png' },
-    { name: '小红书', handle: '@<机主>', emoji: '📕', url: 'https://www.xiaohongshu.com/user/profile/64be86b700000000140342cb', qr: '/账号二维码/小红书.png' }
+    { name: '哔哩哔哩', handle: '@<机主>', emoji: '📺', url: 'https://<你的B站主页>', qr: '/账号二维码/哔哩哔哩.jpg' },
+    { name: '抖音', handle: '@<机主>（蛋炒饭里悟真我）', emoji: '🎵', url: 'https://<你的抖音主页>', qr: '/账号二维码/抖音.png' },
+    { name: '小红书', handle: '@<机主>', emoji: '📕', url: 'https://<你的小红书主页>', qr: '/账号二维码/小红书.png' }
   ];
   siteBase().then(function (base) {
     const grid = el('div', 'site-media-grid');
