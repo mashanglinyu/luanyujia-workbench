@@ -80,6 +80,62 @@
 
 ---
 
+## 全目录（37 篇 · 带链接）
+
+> 你的 `00-INDEX.md` 是纯文字结论清单（没有链接）⇒ 这里补一份**带链接**的目录，方便直接点进去。
+
+### 根层（4 篇）
+
+| 这篇讲什么 | 文件 |
+|---|---|
+| 00 INDEX — Hermes 逆向档案 | [`Hermes/00-INDEX.md`](Hermes/00-INDEX.md) |
+| 01 侦察 | [`Hermes/01-侦察.md`](Hermes/01-侦察.md) |
+| 05 改造清单 | [`Hermes/05-改造清单.md`](Hermes/05-改造清单.md) |
+| 07 未解问题 | [`Hermes/07-未解问题.md`](Hermes/07-未解问题.md) |
+
+### 02-主线（16 篇 · 一个机制一篇）
+
+| 这篇讲什么 | 文件 |
+|---|---|
+| 01 Agent 主循环 | [`Hermes/02-主线/01-agent-loop.md`](Hermes/02-主线/01-agent-loop.md) |
+| 02 工具系统与权限 | [`Hermes/02-主线/02-tools-permissions.md`](Hermes/02-主线/02-tools-permissions.md) |
+| 03 上下文压缩 | [`Hermes/02-主线/03-context-compaction.md`](Hermes/02-主线/03-context-compaction.md) |
+| 04 记忆分层 | [`Hermes/02-主线/04-memory.md`](Hermes/02-主线/04-memory.md) |
+| 05 提示词拼装 | [`Hermes/02-主线/05-prompt-assembly.md`](Hermes/02-主线/05-prompt-assembly.md) |
+| 06 子代理与多智能体 | [`Hermes/02-主线/06-subagents.md`](Hermes/02-主线/06-subagents.md) |
+| 07 工作流 | [`Hermes/02-主线/07-workflows.md`](Hermes/02-主线/07-workflows.md) |
+| 08 技能系统 | [`Hermes/02-主线/08-skills.md`](Hermes/02-主线/08-skills.md) |
+| 09 MCP / 连接器 | [`Hermes/02-主线/09-mcp.md`](Hermes/02-主线/09-mcp.md) |
+| 10 任务与会话模型 | [`Hermes/02-主线/10-task-model.md`](Hermes/02-主线/10-task-model.md) |
+| 11 注入防护 | [`Hermes/02-主线/11-injection-defense.md`](Hermes/02-主线/11-injection-defense.md) |
+| 12 计费与模型路由 | [`Hermes/02-主线/12-billing-routing.md`](Hermes/02-主线/12-billing-routing.md) |
+| 13 安装 / 数据目录 / 迁移 | [`Hermes/02-主线/13-update-migration.md`](Hermes/02-主线/13-update-migration.md) |
+| 14 失败分类与恢复 | [`Hermes/02-主线/14-failure-recovery.md`](Hermes/02-主线/14-failure-recovery.md) |
+| 15 自我验证与证据台账 | [`Hermes/02-主线/15-verification.md`](Hermes/02-主线/15-verification.md) |
+| 16 本地模型：接入、托管与物理约束 | [`Hermes/02-主线/16-local-models.md`](Hermes/02-主线/16-local-models.md) |
+
+### 06-证据（17 篇 · 每篇主线配一份）
+
+| 这篇讲什么 | 文件 |
+|---|---|
+| 证据 E01 — Agent 主循环 | [`Hermes/06-证据/E01-agent-loop.md`](Hermes/06-证据/E01-agent-loop.md) |
+| 证据 E02 — 工具系统与权限 | [`Hermes/06-证据/E02-tools-permissions.md`](Hermes/06-证据/E02-tools-permissions.md) |
+| 证据 E03 — 上下文压缩 | [`Hermes/06-证据/E03-context-compaction.md`](Hermes/06-证据/E03-context-compaction.md) |
+| 证据 E04 — 记忆分层 | [`Hermes/06-证据/E04-memory.md`](Hermes/06-证据/E04-memory.md) |
+| 证据 E05 — 提示词拼装 | [`Hermes/06-证据/E05-prompt-assembly.md`](Hermes/06-证据/E05-prompt-assembly.md) |
+| 证据 E06 — 子代理与多智能体 | [`Hermes/06-证据/E06-subagents.md`](Hermes/06-证据/E06-subagents.md) |
+| 证据 E07 — 工作流 | [`Hermes/06-证据/E07-workflows.md`](Hermes/06-证据/E07-workflows.md) |
+| 证据 E08 — 技能系统 | [`Hermes/06-证据/E08-skills.md`](Hermes/06-证据/E08-skills.md) |
+| 证据 E09 — MCP / 连接器 | [`Hermes/06-证据/E09-mcp.md`](Hermes/06-证据/E09-mcp.md) |
+| 证据 E10 — 任务与会话模型 | [`Hermes/06-证据/E10-task-model.md`](Hermes/06-证据/E10-task-model.md) |
+| 证据 E11 — 注入防护 | [`Hermes/06-证据/E11-injection-defense.md`](Hermes/06-证据/E11-injection-defense.md) |
+| 证据 E12 — 计费与模型路由 | [`Hermes/06-证据/E12-billing-routing.md`](Hermes/06-证据/E12-billing-routing.md) |
+| 证据 E13 — 安装 / 数据目录 / 迁移 | [`Hermes/06-证据/E13-update-migration.md`](Hermes/06-证据/E13-update-migration.md) |
+| 证据 E14 — 失败分类 / 退避 / 冷却 / 截止 | [`Hermes/06-证据/E14-failure-recovery.md`](Hermes/06-证据/E14-failure-recovery.md) |
+| 证据 E15 — 自我验证 / 证据台账 / 停止闸门 | [`Hermes/06-证据/E15-verification.md`](Hermes/06-证据/E15-verification.md) |
+| 证据 E16 — 图片生命周期 / 出站驱逐 | [`Hermes/06-证据/E16-image-eviction.md`](Hermes/06-证据/E16-image-eviction.md) |
+| 证据 E17 — 本地模型：接入、托管与物理约束 | [`Hermes/06-证据/E17-local-models.md`](Hermes/06-证据/E17-local-models.md) |
+
 ## 怎么读（建议顺序）
 
 1. [`Hermes/00-INDEX.md`](Hermes/00-INDEX.md) —— 先看它拆了哪些面（3 分钟）
