@@ -1,0 +1,80 @@
+{
+  "id": "oa-ops",
+  "name": "客户系统运维",
+  "description": "云服务器运维工作台：服务器状态、SSH 终端、操作日志、本地云端文件、网址快捷监控、AI 助手",
+  "layout": "grid",
+  "theme": "dark",
+  "panels": [
+    {
+      "id": "p1",
+      "title": "服务器状态",
+      "type": "dash",
+      "w": 1,
+      "h": 2
+    },
+    {
+      "id": "p2",
+      "title": "运维组合窗",
+      "type": "combo",
+      "w": 2,
+      "h": 2,
+      "previewPanelId": "oa-combo-view",
+      "previewQuickLinks": [
+        {
+          "label": "E 盘",
+          "launchPath": "<盘根>\\"
+        }
+      ],
+      "subPanels": [
+        {
+          "id": "oa-ssh",
+          "title": "SSH 终端",
+          "type": "shell",
+          "w": 1,
+          "h": 1
+        },
+        {
+          "id": "oa-cloudfile",
+          "title": "云端文件",
+          "type": "file",
+          "mode": "cloud",
+          "w": 1,
+          "h": 1
+        },
+        {
+          "id": "oa-logs",
+          "title": "操作日志",
+          "type": "log",
+          "w": 2,
+          "h": 1
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "title": "本地文件",
+      "type": "file",
+      "w": 1,
+      "h": 2,
+      "mode": "local",
+      "viewPanel": "oa-combo-view"
+    },
+    {
+      "id": "p4",
+      "title": "网址",
+      "type": "web",
+      "w": 1,
+      "h": 2
+    },
+    {
+      "id": "p5",
+      "title": "AI·客户系统运维",
+      "type": "harness",
+      "sessionTitle": "客户系统运维",
+      "sessionId": "session-0000…",
+      "pinTarget": "客户系统运维",
+      "w": 3,
+      "h": 2
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "bilibili",
+  "name": "B站视频理解",
+  "description": "B站：左边网页直接看/搜，右边 AI 帮你总结、找相关视频（对话名「B站」）",
+  "layout": "grid",
+  "theme": "dark",
+  "cols": 5,
+  "panels": [
+    {
+      "id": "p1",
+      "title": "B站（网页）",
+      "type": "embed",
+      "url": "https://www.bilibili.com",
+      "col": 1,
+      "row": 1,
+      "w": 4,
+      "h": 6,
+      "userAgent": "chrome",
+      "embedToggle": false,
+      "failHint": "B站打不开：① 检查网络 ② 点右上角「在浏览器中打开」"
+    },
+    {
+      "id": "p2",
+      "title": "AI·B站",
+      "type": "harness",
+      "sessionTitle": "B站",
+      "sessionId": "session-0000…",
+      "pinTarget": "B站",
+      "col": 5,
+      "row": 1,
+      "w": 1,
+      "h": 6
+    }
+  ]
+}

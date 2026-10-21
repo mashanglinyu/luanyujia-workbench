@@ -1,0 +1,95 @@
+{
+  "id": "dsh-gui",
+  "name": "工作台改造",
+  "description": "改造 DSH 本体：上排 3+1（左「文件预览」大窗 / 右「文件管理」，默认 C/D/E/F 盘），下排 2+2（左「底层/引擎侧改造」会话「DSH改造」、右「工作台界面侧改造」会话「GUI页面改造」）。版式照「自我复盘」。分工与写回点见 scenarios\\dsh-gui-context.md。",
+  "layout": "grid",
+  "theme": "dark",
+  "panels": [
+    {
+      "id": "p1",
+      "title": "文件预览",
+      "sub": "",
+      "hint": "文件预览",
+      "emptyMsg": "",
+      "home": true,
+      "filesPanel": "dg-files",
+      "homeFolders": [
+        {
+          "label": "外壳",
+          "path": "<DSH根>\\外壳"
+        },
+        {
+          "label": "引擎",
+          "path": "<DSH根>\\引擎"
+        },
+        {
+          "label": "工作区",
+          "path": "<DSH根>\\工作区"
+        },
+        {
+          "label": "场景记忆",
+          "path": "<DSH根>\\引擎\\场景项目信息"
+        },
+        {
+          "label": "工具",
+          "path": "<DSH根>\\工具"
+        },
+        {
+          "label": "E 盘",
+          "path": "<盘根>\\"
+        }
+      ],
+      "type": "view",
+      "col": 1,
+      "row": 1,
+      "w": 3,
+      "h": 3
+    },
+    {
+      "id": "p2",
+      "title": "文件管理",
+      "sub": "",
+      "type": "file",
+      "mode": "local",
+      "drives": [
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "viewPanel": "dg-preview",
+      "col": 4,
+      "row": 1,
+      "w": 1,
+      "h": 3
+    },
+    {
+      "id": "p3",
+      "title": "AI·DSH改造",
+      "sub": "底层 / 引擎侧（<DSH根>\\引擎）",
+      "type": "harness",
+      "sessionTitle": "DSH改造",
+      "sessionId": "session-0000…",
+      "pinTarget": "DSH改造",
+      "expand": true,
+      "col": 1,
+      "row": 4,
+      "w": 2,
+      "h": 2
+    },
+    {
+      "id": "p4",
+      "title": "AI·GUI页面改造",
+      "sub": "界面 / 外观侧（<DSH根>\\外壳）",
+      "type": "harness",
+      "sessionTitle": "GUI页面改造",
+      "sessionId": "session-0000…",
+      "pinTarget": "GUI页面改造",
+      "expand": true,
+      "col": 3,
+      "row": 4,
+      "w": 2,
+      "h": 2
+    }
+  ]
+}

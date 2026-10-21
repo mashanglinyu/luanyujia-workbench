@@ -1,0 +1,9 @@
+{
+  "id": "stock-analysis",
+  "name": "行情分析",
+  "description": "私人行情分析：趋势看板、板块雷达、选股建议、AI 助手（**本模板面板留空**）",
+  "layout": "grid",
+  "cols": 8,
+  "theme": "dark",
+  "panels": []
+}

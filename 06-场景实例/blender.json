@@ -1,0 +1,40 @@
+{
+  "id": "blender",
+  "name": "三维建模",
+  "description": "Blender 工作台：实时画面、本地文件、AI 助手（MCP 直驱 Blender）",
+  "layout": "grid",
+  "theme": "dark",
+  "first": true,
+  "panels": [
+    {
+      "id": "p1",
+      "title": "Blender",
+      "type": "bl-live",
+      "col": 1,
+      "row": 1,
+      "w": 3,
+      "h": 4
+    },
+    {
+      "id": "p2",
+      "title": "本地文件",
+      "type": "bl-folder",
+      "col": 4,
+      "row": 1,
+      "w": 1,
+      "h": 2
+    },
+    {
+      "id": "p3",
+      "title": "AI·Blender 控制",
+      "type": "harness",
+      "sessionTitle": "Blender 控制",
+      "sessionId": "session-0000…",
+      "pinTarget": "Blender 控制",
+      "col": 4,
+      "row": 3,
+      "w": 1,
+      "h": 2
+    }
+  ]
+}

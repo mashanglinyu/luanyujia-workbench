@@ -1,0 +1,124 @@
+/* tabbar.css —— 摘自 styles.css：标签本体 / 图标 / 激活态 / 收起态 / 占位格 / 拖拽态 / 分离按钮
+   ⚠ 依赖主题变量（--accent / --accent-soft / --text 等），单独拷走要先补变量。 */
+
+:root { --accent: #4f8cff; --accent-soft: rgba(79,140,255,.16); --text: #e6e8ec; }   /* ← 示例变量，按你的主题改 */
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color .15s ease, background .15s ease, border-color .15s ease;
+}
+.tab .tab-ico { font-size: 14px; line-height: 1; opacity: .85; }
+.tab .tab-ico-img {
+  width: 17px; height: 17px; border-radius: 4px; object-fit: cover;
+  display: block; box-shadow: 0 1px 2px rgba(0,0,0,.35);
+}
+.tab.active .tab-ico-img { box-shadow: 0 0 0 1px rgba(79,140,255,.5), 0 1px 3px rgba(0,0,0,.4); }
+.tab:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+}
+.tab.active {
+  background: linear-gradient(180deg, rgba(79, 140, 255, 0.16), rgba(79, 140, 255, 0.07));
+  color: #fff;
+  border-color: rgba(79, 140, 255, 0.35);
+  font-weight: 600;
+}
+.tab.active::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(79, 140, 255, 0.7);
+}
+/* ---- 场景标签栏：拖拽换位 + 未激活标签收成图标（2026-09-26 重做，实现在 renderers.js 的 initScenarioTabBar）----
+   关键点：展开/收起两端都走**明确 px**（--tab-w / --tab-cw / --label-w，由 JS 量出来写进元素）——
+   width 与 max-width 才可过渡。悬停之所以丝滑，靠的是"上游标签宽度在动画、后面的标签每帧跟着重排"，
+   不需要 JS 逐帧；用 auto / 百分比则过渡不了（百分比还会形成反馈环）。
+   拖拽用"脱流标签 + 占位格 + 其它标签 FLIP"，见 .tab-dragging / .tab-placeholder。 */
+#scenario-tabs { position: relative; }          /* 拖拽时被拖标签是 absolute，参照物是它 */
+.tab {
+  flex: 0 0 auto;                                /* 宽度由变量决定，别被 flex 拉伸 */
+  width: var(--tab-w, auto);
+  transition: color .15s ease, background .15s ease, border-color .15s ease,
+              width .24s cubic-bezier(.2, .8, .2, 1);
+}
+.tab .tab-label {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: var(--label-w, none);
+  transition: max-width .24s cubic-bezier(.2, .8, .2, 1), opacity .16s ease,
+              transform .24s cubic-bezier(.2, .8, .2, 1);
+}
+/* 收起态（未激活 + 没悬停 + 没在拖）＝ 只留图标；gap 归零才能让图标正好居中 */
+.tab.tab-collapsed {
+  width: var(--tab-cw, 33px);
+  padding-left: 7px;
+  padding-right: 7px;
+  gap: 0;
+  justify-content: center;
+}
+.tab.tab-collapsed .tab-label { max-width: 0; opacity: 0; transform: translateX(-4px); }
+.tab.tab-collapsed .tab-detach { opacity: 0; pointer-events: none; width: 0; padding: 0; margin: 0; overflow: hidden; }
+.tab[data-movable="1"] { cursor: grab; }
+.tab[data-movable="1"]:active { cursor: grabbing; }
+/* 正在拖的标签：脱流、抬起、跟手 */
+.tab.tab-dragging {
+  z-index: 40;
+  cursor: grabbing;
+  transition: none;
+  background: rgba(79, 140, 255, .16);
+  border-color: rgba(79, 140, 255, .5);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .45);
+  transform: scale(1.04);
+  opacity: .97;
+}
+/* 落位占位格：一眼看出会掉到哪儿 */
+.tab-placeholder {
+  flex: 0 0 auto;
+  border: 1px dashed rgba(79, 140, 255, .5);
+  border-radius: 9px;
+  background: rgba(79, 140, 255, .07);
+}
+.tabs-dragging .tab:not(.tab-dragging) {
+  transition: transform .18s cubic-bezier(.2, .8, .2, 1), color .15s ease, background .15s ease,
+              border-color .15s ease, width .24s cubic-bezier(.2, .8, .2, 1);
+}
+
+/* ---- 场景分离（多窗口）：标签上的「⧉ 在新窗口打开」 + 已在独立窗口的标记 ---- */
+.tab .tab-detach {
+  margin-left: 2px;
+  padding: 0 2px;
+  font-size: 12px;
+  line-height: 1;
+  opacity: .35;
+  border-radius: 4px;
+  transition: opacity .15s ease, background .15s ease, color .15s ease;
+}
+.tab:hover .tab-detach { opacity: .8; }
+.tab .tab-detach:hover { opacity: 1; background: rgba(79,140,255,.22); color: #fff; }
+.tab.detached { border-color: rgba(61,220,132,.35); }
+.tab.detached .tab-detach { opacity: .95; color: #3ddc84; }
+
+/* ── 补丁段 ── */
+
+.tab { align-items: center; }                 /* 只对齐，不动宽高 */
+.tab.active { background: var(--accent-soft); color: var(--text); box-shadow: inset 0 -2px 0 var(--accent); }
+.tab:not(.active) { opacity: .78; }
+.tab:not(.active):hover { opacity: 1; }
+.tab .tab-ico, .tab .tab-ico-img { align-self: center; }
