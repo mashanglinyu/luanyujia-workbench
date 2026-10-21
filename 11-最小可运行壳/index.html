@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>最小可运行壳 · 多场景 AI 工作台 Demo</title>
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   最小可运行壳 —— 一个文件、零依赖、双击就能开
+   它把四个板块的机制压到能一眼看懂的最小实现：
+     01 场景配置（JSON 描述面板摆哪）· 02 会话绑定（三字段）·
+     07 标签栏（拖拽换位 + 未激活收成图标）· 10 面板实现（file / view / harness 三件套）
+   ⚠ 这是"机制的演示"，不是真实工作台：数据是假的，引擎是模拟的。
+   ══════════════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#0a1220; --panel:#101a2c; --panel2:#0d1626; --line:rgba(34,211,238,.18);
+  --cyan:#22d3ee; --cyan-soft:rgba(34,211,238,.14); --text:#e2e8f0; --dim:#8fa3bf; --ok:#4ade80; --warn:#fbbf24;
+  --tab-h:38px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);overflow:hidden;
+  font:14px/1.6 -apple-system,"Segoe UI","Noto Sans SC","Microsoft YaHei",sans-serif;
+  background-image:radial-gradient(circle at 15% -10%,rgba(34,211,238,.08),transparent 55%);
+  display:flex;flex-direction:column;
+}
+/* ── 顶栏：场景标签栏（对应 07）────────────────────────────────────── */
+.tabs{
+  height:var(--tab-h);flex:0 0 auto;display:flex;align-items:stretch;gap:2px;
+  padding:0 8px;background:var(--panel2);border-bottom:1px solid var(--line);
+  overflow-x:auto;overflow-y:hidden;
+}
+.tab{
+  position:relative;display:flex;align-items:center;gap:6px;flex:0 0 auto;
+  padding:0 12px;border:0;background:transparent;color:var(--dim);cursor:pointer;
+  border-bottom:2px solid transparent;font:inherit;white-space:nowrap;
+  transition:background .12s,color .12s,opacity .12s;
+}
+.tab:hover{color:var(--text);background:rgba(255,255,255,.03)}
+.tab.active{color:var(--text);border-bottom-color:var(--cyan);background:var(--cyan-soft)}
+.tab .ico{font-size:15px;line-height:1}
+.tab .label{font-size:13px;max-width:140px;overflow:hidden;transition:max-width .18s,opacity .18s}
+.tab.collapsed .label{max-width:0;opacity:0}     /* 未激活收成图标：10+ 个场景也不挤 */
+.tab[data-movable="1"]{cursor:grab}
+.tab.dragging{cursor:grabbing;z-index:3;background:var(--panel);box-shadow:0 6px 20px #0008}
+.tabs.dragging .tab:not(.dragging){opacity:.55}
+.tabs-right{margin-left:auto;display:flex;align-items:center;gap:10px;padding-left:10px;color:var(--dim);font-size:12px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(74,222,128,.15);display:inline-block}
+/* ── 网格：面板摆哪儿（对应 01 的 col/row/w/h）────────────────────────── */
+.grid{
+  flex:1;min-height:0;display:grid;gap:10px;padding:10px;
+  grid-template-columns:repeat(var(--cols,8),minmax(0,1fr));
+  grid-template-rows:repeat(var(--rows,6),minmax(0,1fr));
+}
+.panel{
+  min-width:0;min-height:0;display:flex;flex-direction:column;
+  background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden;
+}
+.panel-head{
+  flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:6px 10px;
+  background:rgba(255,255,255,.02);border-bottom:1px solid var(--line);
+  font-size:12px;color:var(--dim);user-select:none;
+}
+.panel-head .t{color:var(--text);font-weight:600;font-size:12.5px}
+.panel-head .acts{margin-left:auto;display:flex;gap:6px}
+.chip{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--dim);
+  border-radius:3px;padding:1px 6px;font-size:11px;cursor:pointer}
+.chip:hover{color:var(--cyan);border-color:var(--cyan)}
+.panel-body{flex:1;min-height:0;overflow:auto;padding:8px 10px}
+/* ── file 面板 ─────────────────────────────────────────────────────── */
+.frow{display:flex;align-items:center;gap:8px;padding:4px 6px;border-radius:4px;cursor:pointer;font-size:13px}
+.frow:hover{background:rgba(255,255,255,.04)}
+.frow.sel{background:var(--cyan-soft);color:var(--cyan)}
+.frow .sz{margin-left:auto;color:var(--dim);font-size:11px}
+.fdir{color:var(--dim)}
+/* ── view 面板 ─────────────────────────────────────────────────────── */
+.view-empty{color:var(--dim);text-align:center;padding:36px 10px;font-size:13px}
+.view-text{white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;font-size:12.5px;color:#c7d2e0}
+.view-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.view-head .path{color:var(--cyan);font-size:12px}
+/* ── harness 面板（AI 会话）─────────────────────────────────────────── */
+.chat{display:flex;flex-direction:column;gap:8px;font-size:13px}
+.msg{display:flex;gap:8px}
+.msg .who{flex:0 0 auto;width:30px;height:30px;border-radius:4px;display:grid;place-items:center;
+  background:var(--cyan-soft);color:var(--cyan);font-size:12px;border:1px solid var(--line)}
+.msg .bubble{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:5px;padding:6px 9px;max-width:100%}
+.msg.me .who{background:rgba(74,222,128,.14);color:var(--ok)}
+.sys{color:var(--dim);font-size:12px;padding:4px 6px;border-left:2px solid var(--line);margin:2px 0 8px}
+.pin{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;color:var(--dim)}
+.pin code{background:rgba(34,211,238,.1);color:var(--cyan);padding:1px 5px;border-radius:3px}
+/* ── 底部状态栏 ───────────────────────────────────────────────────── */
+.status{
+  flex:0 0 auto;height:26px;display:flex;align-items:center;gap:14px;padding:0 12px;
+  background:var(--panel2);border-top:1px solid var(--line);color:var(--dim);font-size:11.5px;
+}
+.status .k{color:var(--cyan)}
+</style>
+</head>
+<body>
+
+<!-- 顶栏：场景标签栏（由 JS 建，和真实工作台一样"外壳建 DOM、交互在渲染层"） -->
+<nav class="tabs" id="tabs" data-tabbar="demo-1"></nav>
+
+<!-- 网格：面板由场景配置决定 -->
+<main class="grid" id="grid"></main>
+
+<footer class="status">
+  <span><i class="dot"></i> 引擎：模拟就绪</span>
+  <span>场景：<b class="k" id="st-scene">—</b></span>
+  <span>会话：<b class="k" id="st-session">—</b></span>
+  <span>面板：<b class="k" id="st-panels">0</b></span>
+  <span style="margin-left:auto">最小可运行壳 · 机制的演示，不是真实工作台</span>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   0. 模拟的"外壳桥"  app.*
+   ──────────────────────────────────────────────────────────────────────
+   真实工作台里这些能力由 Electron 主进程注入（读盘 / IPC / 窗口）。
+   这里全部用假数据实现，只为让"面板 → 桥 → 数据"这条链路看得见。
+   ⚠ 你把同名方法换成真实实现，demo 就变成真的了。
+   ══════════════════════════════════════════════════════════════════════ */
+const app = {
+  log: (s) => console.log('[demo] ' + s),
+  // 假文件树：目录 + 文件（真实实现里是 fs.readdir）
+  file: {
+    async list(dir) {
+      const tree = {
+        '': [
+          { name: '01-场景模式', dir: true },
+          { name: '02-会话定位与跟随', dir: true },
+          { name: '10-源码', dir: true },
+          { name: 'README.md', size: 13.5 * 1024 },
+        ],
+        '01-场景模式': [
+          { name: '场景配置格式.md', size: 5.9 * 1024 },
+          { name: '面板类型总览.md', size: 4.6 * 1024 },
+        ],
+        '02-会话定位与跟随': [
+          { name: '二-会话绑定三字段.md', size: 7.4 * 1024 },
+          { name: '四-防串台.md', size: 4.1 * 1024 },
+        ],
+        '10-源码': [
+          { name: 'sessions.mjs', size: 50.5 * 1024 },
+          { name: '面板-view-预览.js', size: 104.8 * 1024 },
+        ],
+      };
+      return tree[dir] || [];
+    },
+    async read(path) {
+      return '// ' + path + '\n\n（这里演示的是"点文件 → 在 view 面板里打开"的链路）\n'
+        + '真实工作台里这一步会走 app.file.read(path) 读真文件；\n'
+        + '注意它同时做了三件事：\n'
+        + '  ① 只读前 N KB（大文件不整篇载入）\n'
+        + '  ② 路径不存在时显示空态（不静默空白）\n'
+        + '  ③ 把"当前打开的文件"记在面板状态里（切场景回来还在）\n';
+    },
+  },
+  // 假会话：真实实现里是引擎里的一条 session（三字段绑定）
+  session: {
+    current: { id: 'session-00000000-0000-0000-0000-000000000000', title: '演示会话 · A', round: 7 },
+    history: { 0: [
+      { me: true, text: '这套东西最难的部分是什么？' },
+      { me: false, text: '不是界面，是"身份"——引擎不按场景注入任何东西，会话打开时并不知道自己是哪个场景。所以要有一张索引表 + 一张定位卡，开场 30 秒自己认领。' },
+    ] },
+    async rotate() {
+      // 演示"换会话 = 三处同步"，这是真实流程（02/五）的最小版
+      const old = this.current;
+      const n = (Number(String(old.title).match(/(\d+)$/) ? String(old.title).match(/(\d+)$/)[1] : 1) % 26) + 1;
+      this.current = { id: 'session-00000000-0000-0000-0000-00000000000' + (n % 10), title: '演示会话 · ' + String.fromCharCode(64 + n), round: 1 };
+      app.log('换会话：' + old.title + ' → ' + this.current.title);
+      return [old, this.current];
+    },
+  },
+};
+
+/* ══════════════════════════════════════════════════════════════════════
+   1. 场景配置（对应 01）：一个对象 = 一个场景
+   col / row / w / h 就是 CSS grid 的格位；cols 是总列数
+   ══════════════════════════════════════════════════════════════════════ */
+const SCENES = [
+  {
+    id: 'files', name: '文件与预览', icon: '📁', cols: 8,
+    panels: [
+      { id: 'p1', type: 'file', title: '文件管理', col: 1, row: 1, w: 2, h: 6 },
+      { id: 'p2', type: 'view', title: '预览', col: 3, row: 1, w: 4, h: 6, filesPanel: 'p1' },
+      { id: 'p3', type: 'harness', title: 'AI·演示', col: 7, row: 1, w: 2, h: 6 },
+    ],
+  },
+  {
+    id: 'chat', name: '只留 AI', icon: '🤖', cols: 8,
+    panels: [
+      { id: 'q1', type: 'harness', title: 'AI·演示（宽版）', col: 1, row: 1, w: 5, h: 6 },
+      { id: 'q2', type: 'view', title: '预览', col: 6, row: 1, w: 3, h: 6 },
+    ],
+  },
+  {
+    id: 'empty', name: '空场景（骨架）', icon: '⬚', cols: 8,
+    panels: [ { id: 'e1', type: 'reserved', title: '这里留给你的面板', col: 1, row: 1, w: 8, h: 6 } ],
+  },
+];
+
+/* ══════════════════════════════════════════════════════════════════════
+   2. 面板渲染器注册表（对应 01「面板类型与注册」/ 10「面板实现」）
+   ──────────────────────────────────────────────────────────────────────
+   约定：每个渲染器拿 (panel, host) ，自己往 host 里建内容。
+   真实工作台里这张表叫 APP_RENDERERS，且支持热更新。
+   ══════════════════════════════════════════════════════════════════════ */
+const RENDERERS = {
+  /* ── file：文件管理（最小版，约 40 行）── */
+  file(panel, host) {
+    let cur = '';
+    const draw = async () => {
+      host.innerHTML = '';
+      const head = el('div', 'view-head');
+      head.append(el('span', 'path', '/' + cur), el('span', '', '（演示数据）'));
+      host.append(head);
+      const rows = await app.file.list(cur);
+      for (const r of rows) {
+        const row = el('div', 'frow' + (r.dir ? ' fdir' : ''));
+        row.append(el('span', '', r.dir ? '📂' : '📄'), el('span', '', r.name));
+        if (r.size) row.append(el('span', 'sz', (r.size / 1024).toFixed(1) + ' KB'));
+        row.onclick = () => {
+          if (r.dir) { cur = r.name; draw(); }
+          else { openInView(panel, cur ? cur + '/' + r.name : r.name); }
+        };
+        host.append(row);
+      }
+    };
+    draw();
+  },
+
+  /* ── view：预览（与 file 互指：走 panel.filesPanel / panel.viewPanel）── */
+  view(panel, host) {
+    const box = el('div');
+    host.append(box);
+    const empty = () => { box.innerHTML = ''; box.append(el('div', 'view-empty', '左边点一个文件 → 在这里打开\n（真实实现里这里还支持图片/PDF/网页）')); };
+    empty();
+    panel._show = async (path) => {
+      const text = await app.file.read(path);
+      box.innerHTML = '';
+      const head = el('div', 'view-head');
+      head.append(el('span', 'path', path), el('span', '', '只读 · 前 8 KB'));
+      const pre = el('div', 'view-text', text);
+      box.append(head, pre);
+    };
+    if (panel._pending) { panel._show(panel._pending); panel._pending = null; }
+  },
+
+  /* ── harness：AI 会话面板（最核心 —— 三字段钉会话 + 换会话）── */
+  harness(panel, host) {
+    const box = el('div');
+    host.append(box);
+    const draw = () => {
+      const s = app.session.current;
+      const msgs = app.session.history[0] || [];
+      box.innerHTML = '';
+      // 三字段（真实实现里 pinTarget / sessionTitle / sessionId 都要落到场景 json）
+      const pin = el('div', 'pin');
+      pin.append(
+        el('span', '', '钉定：'),
+        el('code', '', 'id=' + s.id.slice(0, 14) + '…'),
+        el('code', '', 'title=' + s.title),
+      );
+      const btn = el('span', 'chip', '换会话');
+      btn.onclick = async () => {
+        const [oldS, newS] = await app.session.rotate();
+        app.session.history[0] = [{ me: false, text: '（这是新会话，上下文是空的 —— 所以"交接"必须写在文件里）' }];
+        draw();
+        toast('已换会话：' + oldS.title + ' → ' + newS.title + '｜三处要同步：场景 json · 索引表 · §〇 交接');
+      };
+      pin.append(btn);
+      box.append(pin);
+      const chat = el('div', 'chat');
+      chat.append(el('div', 'sys', '会话轮次：第 ' + s.round + ' 轮 ｜ 记忆在文件里，不在会话里'));
+      for (const m of msgs) {
+        const row = el('div', 'msg' + (m.me ? ' me' : ''));
+        row.append(el('div', 'who', m.me ? '我' : 'AI'), el('div', 'bubble', m.text));
+        chat.append(row);
+      }
+      box.append(chat);
+    };
+    draw();
+    panel._redraw = draw;
+  },
+
+  /* ── reserved：占位面板（版式先定、功能后补）── */
+  reserved(panel, host) {
+    host.append(el('div', 'view-empty', '⬚ 占位面板\n\n在场景 json 里把 type 换成 file / view / harness 就有了功能。\n这就是"先搭壳、再填功能"的顺序。'));
+  },
+};
+
+/* ══════════════════════════════════════════════════════════════════════
+   3. 建壳：标签栏 + 网格 + 面板（对应 07 与 01）
+   ══════════════════════════════════════════════════════════════════════ */
+const tabsEl = document.getElementById('tabs');
+const gridEl = document.getElementById('grid');
+let current = SCENES[0];
+const order = SCENES.map((s) => s.id);   // 顺序：真实实现里由主进程持久化（单一权威）
+
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function toast(msg) {
+  const t = el('div', '', msg);
+  t.style.cssText = 'position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:#101a2c;'
+    + 'border:1px solid rgba(34,211,238,.35);color:#e2e8f0;padding:8px 14px;border-radius:4px;font-size:12.5px;z-index:99';
+  document.body.append(t);
+  setTimeout(() => t.remove(), 2600);
+}
+
+function buildTabs() {
+  tabsEl.innerHTML = '';
+  for (const id of order) {
+    const s = SCENES.find((x) => x.id === id);
+    const tab = el('button', 'tab' + (s.id === current.id ? ' active' : ''));
+    tab.dataset.id = s.id;
+    tab.dataset.movable = '1';      // ⚠ 只是光标样式；不要设 HTML5 draggable（会和 click 抢事件）
+    tab.append(el('span', 'ico', s.icon), el('span', 'label', s.name));
+    tab.onclick = () => { if (!tab._moved) switchScene(s.id); };   // 拖拽后吞掉这次 click
+    enableDrag(tab);
+    tabsEl.append(tab);
+  }
+  const right = el('div', 'tabs-right');
+  right.append(el('span', '', '拖我换位 · 未激活的自动收成图标'));
+  tabsEl.append(right);
+  applyCollapse();
+}
+
+/* 标签拖拽换位（07 的最小版：指针事件 + 落点计算 + 顺序只报给"外壳"） */
+function enableDrag(tab) {
+  let down = null;
+  tab.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0) return;
+    down = { x: e.clientX, y: e.clientY, moved: false };
+    tab.setPointerCapture(e.pointerId);
+  });
+  tab.addEventListener('pointermove', (e) => {
+    if (!down) return;
+    if (!down.moved && Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6) {
+      down.moved = true; tab._moved = true; tab.classList.add('dragging'); tabsEl.classList.add('dragging');
+    }
+    if (!down.moved) return;
+    const rect = tab.getBoundingClientRect();
+    tab.style.transform = 'translateX(' + (e.clientX - down.x) + 'px)';
+    const target = dropIndex(e.clientX, tab);
+    const from = order.indexOf(tab.dataset.id);
+    if (target !== from && target !== from + 1) {
+      order.splice(from, 1);
+      order.splice(target > from ? target - 1 : target, 0, tab.dataset.id);
+      rebuildKeepDrag(tab);
+    }
+    void rect;
+  });
+  tab.addEventListener('pointerup', () => {
+    if (down && down.moved) {
+      tab._moved = true;
+      setTimeout(() => { tab._moved = false; }, 0);   // 拖完这一下不算点击
+      app.log('顺序已变更（真实实现：报给主进程持久化）: ' + order.join(' → '));
+    }
+    down = null;
+    tab.classList.remove('dragging'); tabsEl.classList.remove('dragging');
+    tab.style.transform = '';
+    applyCollapse();
+  });
+}
+/* 纯函数：指针在哪个下标之前（从浏览器标签页抄来的规则） */
+function dropIndex(x, dragging) {
+  const tabs = [...tabsEl.querySelectorAll('.tab')].filter((t) => t !== dragging);
+  for (let i = 0; i < tabs.length; i++) {
+    const r = tabs[i].getBoundingClientRect();
+    if (x < r.left + r.width / 2) return i;
+  }
+  return tabs.length;
+}
+function rebuildKeepDrag(dragging) {
+  const keep = dragging.dataset.id;
+  buildTabs();
+  const t = tabsEl.querySelector('.tab[data-id="' + keep + '"]');
+  if (t) t.classList.add('dragging');
+}
+/* 未激活收成图标：激活/悬停的始终展开 */
+function applyCollapse() {
+  for (const t of tabsEl.querySelectorAll('.tab')) {
+    t.classList.toggle('collapsed', !t.classList.contains('active') && !t.matches(':hover'));
+  }
+}
+
+function switchScene(id) {
+  current = SCENES.find((s) => s.id === id);
+  buildTabs();
+  buildGrid();
+  document.getElementById('st-scene').textContent = current.name;
+  document.getElementById('st-session').textContent = app.session.current.title;
+}
+
+function buildGrid() {
+  gridEl.innerHTML = '';
+  gridEl.style.setProperty('--cols', current.cols || 8);
+  const rows = Math.max(...current.panels.map((p) => (p.row || 1) + (p.h || 1) - 1), 1);
+  gridEl.style.setProperty('--rows', rows);
+  for (const panel of current.panels) {
+    const p = el('div', 'panel');
+    p.style.gridColumn = (panel.col || 1) + ' / span ' + (panel.w || 1);
+    p.style.gridRow = (panel.row || 1) + ' / span ' + (panel.h || 1);
+    const head = el('div', 'panel-head');
+    head.append(el('span', '', '▤'), el('span', 't', panel.title || panel.type),
+      el('span', '', '(' + panel.type + ')'));
+    const acts = el('div', 'acts');
+    const rl = el('span', 'chip', '⟳');
+    rl.onclick = () => { buildGrid(); toast('面板重载（真实实现里这次不重启 GUI）'); };
+    acts.append(rl);
+    head.append(acts);
+    const body = el('div', 'panel-body');
+    p.append(head, body);
+    gridEl.append(p);
+    const fn = RENDERERS[panel.type];
+    if (fn) fn(panel, body);
+    else body.append(el('div', 'view-empty', '未知面板类型：' + panel.type + '\n（真实工作台里这里是一行灰字，不报错 —— 最难排查的一种"没生效"）'));
+  }
+  document.getElementById('st-panels').textContent = current.panels.length;
+}
+
+/* file → view：靠配置里的 filesPanel 找到对面的面板 */
+function openInView(fromPanel, path) {
+  const target = current.panels.find((p) => p.id === fromPanel.filesPanel || p.type === 'view');
+  if (!target) { toast('这个场景没有 view 面板'); return; }
+  const host = [...document.querySelectorAll('.panel')].find((_, i) => current.panels[i] === target);
+  if (target._show) { target._show(path); return; }
+  target._pending = path;
+  buildGrid();   // 还没渲染过就重建一次
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   4. 启动
+   ══════════════════════════════════════════════════════════════════════ */
+buildTabs();
+buildGrid();
+document.getElementById('st-scene').textContent = current.name;
+document.getElementById('st-session').textContent = app.session.current.title;
+document.getElementById('st-panels').textContent = current.panels.length;
+window.addEventListener('resize', applyCollapse);
+console.log('%c最小可运行壳已启动', 'color:#22d3ee', '\n场景：' + SCENES.map((s) => s.id).join(' / ')
+  + '\n试试：拖标签换位 / 点文件看右侧预览 / 在 AI 面板点"换会话"');
+</script>
+</body>
+</html>
