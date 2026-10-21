@@ -201,3 +201,7 @@
 <p align="center">
   <sub>作者 <b>淋雨家</b> · 个人站 → <a href="https://luanyujia.pages.dev">luanyujia.pages.dev</a> · GitHub → <a href="https://github.com/mashanglinyu">@mashanglinyu</a></sub>
 </p>
+
+---
+
+> 📅 **最后更新**：2026-10-21（新增 `00-核心机制`、`09-改造参考` 两节；每个目录的说明已改成"这个目录讲什么"）
