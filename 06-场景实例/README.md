@@ -16,6 +16,7 @@
 | [bilibili.json](bilibili.json) | B站视频理解 | 2 | `embed` + `harness` | 左边嵌网页、右边 AI，最省事的双栏 |
 | [blender.json](blender.json) | 三维建模 | 3 | `bl-folder` + `bl-live` + `harness` | **`first: true` 固定在最前**的例子（见 07 的固定组规则） |
 | [design-misc.json](design-misc.json) | 设计杂活 | 4 | `file` + `view` + `reserved` + `harness` | 上排预览/文件、下排预留 + AI |
+| [code-dev.json](code-dev.json) | 程序开发 | 4 | `view` + `file` + `code-urls` + `harness` | 代码项目台：预览 + 目录 + 本地 dev 网址（带手机预览）+ AI |
 | [dsh-gui.json](dsh-gui.json) | 工作台改造 | 4 | `view` + `file` + `harness`×2 | **一个场景两块 AI 面板**（左底层/右界面）+ `homeFolders` 快捷文件夹 |
 | [oa-ops.json](oa-ops.json) | 客户系统运维 | 5 | `combo` + `dash` + `file` + `web` + `harness` | 运维台：仪表盘 + 网页 + 文件 + AI |
 | [pc-cleanup.json](pc-cleanup.json) | 本地电脑 | 5 | `pc-drives` + `pc-toplarge` + `pc-junk` + `pc-ledger` + `harness` | **5 个自定义面板类型**全在一个场景（容量/大户/可清/台账） |

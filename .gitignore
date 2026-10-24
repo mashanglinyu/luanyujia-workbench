@@ -1,0 +1,54 @@
+# ⛔ 本仓库是「公开方法 + 纯壳模板」，不是 DSH 安装包
+# 下面这些一律不进公开仓：运行数据、会话、凭据、模型、备份、工作区
+
+# 会话与运行时数据
+.dsh/
+sessions/
+attachments/
+会话档案/
+工作区/
+备份/
+
+# 依赖与构建产物
+node_modules/
+dist/
+build/
+out/
+*.tgz
+
+# 模型与体积大的二进制
+models/
+model/
+*.gguf
+*.safetensors
+*.onnx
+
+# 日志与数据库
+*.log
+logs/
+*.db
+*.sqlite
+*.sqlite3
+
+# 密钥与本地配置
+.env
+.env.*
+*credential*
+*credentials*
+*secret*
+*keyfile*
+cloudflare.env
+github.env
+
+# 系统与编辑器垃圾
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# 临时产物与截图
+*.tmp
+*.bak
+_tmp/
+临时/

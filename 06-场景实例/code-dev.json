@@ -1,0 +1,62 @@
+{
+  "id": "code-dev",
+  "name": "程序开发",
+  "description": "<程序开发场景>：左上预览代码/文档/网页、右上浏览项目目录（根=当前项目，点路径可复制）、左下项目网址（本地 dev 服务实时在线状态，点击开浏览器）、右下 AI 助手",
+  "layout": "grid",
+  "theme": "dark",
+  "panels": [
+    {
+      "id": "code-preview",
+      "title": "预览",
+      "type": "view",
+      "quickLinks": [
+        { "label": "项目根", "launchPath": "<项目路径>" },
+        { "label": "DSH 根", "launchPath": "<DSH根>" },
+        { "label": "E 盘", "launchPath": "<E盘>" }
+      ],
+      "col": 1,
+      "row": 1,
+      "w": 3,
+      "h": 2
+    },
+    {
+      "id": "code-folder",
+      "title": "根目录",
+      "type": "file",
+      "mode": "local",
+      "root": "<项目路径>",
+      "viewPanel": "code-preview",
+      "col": 4,
+      "row": 1,
+      "w": 1,
+      "h": 2
+    },
+    {
+      "id": "code-urls",
+      "title": "网址",
+      "type": "code-urls",
+      "urls": [
+        { "name": "API 文档", "url": "http://localhost:3000/api/docs", "note": "Swagger · pnpm dev:api" },
+        { "name": "运营后台", "url": "http://localhost:5173", "note": "admin · pnpm dev:admin" },
+        { "name": "用户端 H5", "url": "http://localhost:5174", "note": "miniapp · pnpm dev:miniapp:h5", "phone": true },
+        { "name": "师傅端 H5", "url": "http://localhost:5175", "note": "provider · pnpm dev:provider", "phone": true }
+      ],
+      "col": 1,
+      "row": 3,
+      "w": 1,
+      "h": 2
+    },
+    {
+      "id": "code-ai",
+      "title": "AI·程序开发",
+      "type": "harness",
+      "sessionTitle": "<程序开发>",
+      "sessionId": "session-0000-0000-0000-0000-000000000000",
+      "pinTarget": ["<程序开发>"],
+      "col": 2,
+      "row": 3,
+      "w": 3,
+      "h": 2
+    }
+  ]
+}
