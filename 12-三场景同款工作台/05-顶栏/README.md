@@ -34,6 +34,10 @@
 - **同时开**：5 个窗口互斥的关系**不存在**——可以同时开着（每个是一块独立 webview）；
 - **图标用官网 favicon**（180×180 PNG），不要用 emoji 凑；图片挂了才退回单字。
 
+> 📌 **这 5 张 PNG 本仓库没有附带**（各家 Logo 归各家）：把它们放到 `<外壳>\renderer\assets\webai\`，
+> 文件名就是上表的 `key` + `.png`（`doubao.png` / `tongyi.png` / `deepseek.png` / `chatglm.png` / `kimi.png`）。
+> 取图标最省事的办法：浏览器打开站点 → 看 favicon → 右键保存，放大到 180×180 即可。
+
 ### 放哪
 
 注入到 `#titlebar` 里、紧跟品牌名后面（`brand.nextSibling`），DOM 结构：
