@@ -1,0 +1,48 @@
+/* ============================================================================
+   05-顶栏/发光标签.css —— 场景标签「正在工作」光效
+   效果：哪个场景的会话在干活，那个标签就 ①图标发光 ②标签一圈呼吸光环。
+   触发：渲染器给该场景标签加 class="tab-working"，结束就摘掉。
+       （判定条件：该会话有未完成的步骤 / 有排队的调用）
+   注意：浅色主题会自动调暗；系统开「减少动态效果」时只留静态光、不呼吸。
+============================================================================ */
+
+@keyframes tab-work-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(90, 190, 255, .55), 0 0 8px rgba(90, 190, 255, .22); }
+  50%      { box-shadow: 0 0 0 3px rgba(90, 190, 255, .12), 0 0 16px rgba(90, 190, 255, .55); }
+}
+@keyframes tab-work-ico {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(90, 200, 255, .75)) brightness(1.10); }
+  50%      { filter: drop-shadow(0 0 9px rgba(120, 215, 255, 1)) brightness(1.35); }
+}
+@keyframes tab-work-ring-light {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 120, 220, .45), 0 0 6px rgba(37, 120, 220, .18); }
+  50%      { box-shadow: 0 0 0 3px rgba(37, 120, 220, .10), 0 0 12px rgba(37, 120, 220, .45); }
+}
+
+/* 标签本体：呼吸光环 */
+#scenario-tabs .tab.tab-working {
+  animation: tab-work-ring 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* 标签里的图标（单字图标或图片图标都覆盖） */
+#scenario-tabs .tab.tab-working .tab-ico,
+#scenario-tabs .tab.tab-working .tab-ico-img {
+  animation: tab-work-ico 1.8s ease-in-out infinite;
+}
+
+/* 浅色主题：同一套动效，换更深的蓝，避免浅底上发白 */
+html[data-theme="light"] #scenario-tabs .tab.tab-working {
+  animation-name: tab-work-ring-light;
+}
+
+/* 系统「减少动态效果」：不呼吸，只留静态光 */
+@media (prefers-reduced-motion: reduce) {
+  #scenario-tabs .tab.tab-working,
+  #scenario-tabs .tab.tab-working .tab-ico,
+  #scenario-tabs .tab.tab-working .tab-ico-img {
+    animation: none;
+    box-shadow: 0 0 8px rgba(90, 190, 255, .6);
+    filter: drop-shadow(0 0 5px rgba(90, 200, 255, .85)) brightness(1.2);
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "self-review",
+  "name": "自我复盘",
+  "description": "自我复盘：右上角浏览自己资料文件夹的文件树；左上角大窗口只在这里预览（md 渲染、txt/代码/json/csv 原文、图片可滚轮缩放、视频/音频、PDF、HTML 内嵌、Word/Excel/PPT 转 PDF 后内嵌）；左下角内嵌网页版 AI，右下角 AI 会话面板。默认 4 列网格：上排 3+1（预览 75% / 文件树 25%），下排 2+2。",
+  "layout": "grid",
+  "theme": "dark",
+  "panels": [
+    {
+      "id": "sr-doc",
+      "title": "预览",
+      "sub": "点右上的文件就在此预览；要改才用这排的 🖥 打开系统程序",
+      "type": "review-doc",
+      "col": 1,
+      "row": 1,
+      "w": 3,
+      "h": 3
+    },
+    {
+      "id": "sr-files",
+      "title": "库",
+      "sub": "",
+      "type": "review-files",
+      "root": "<个人资料目录>",
+      "col": 4,
+      "row": 1,
+      "w": 1,
+      "h": 3
+    },
+    {
+      "id": "sr-site-bl",
+      "title": "AI·DeepSeek 网页版",
+      "sub": "chat.deepseek.com · 内置网页",
+      "type": "embed",
+      "url": "https://chat.deepseek.com/",
+      "userAgent": "chrome",
+      "expand": true,
+      "failHint": "先确认这台机器能上网（面板里就是普通网页，不经过工作台）。还不行就点「🌐 浏览器打开」。",
+      "offHint": "已把这个网页摘掉（省一份进程）。点「🔗 内置」切回来，登录状态记在面板自己的分区里。",
+      "col": 1,
+      "row": 4,
+      "w": 2,
+      "h": 2
+    },
+    {
+      "id": "sr-ai",
+      "title": "AI·自我复盘",
+      "type": "harness",
+      "sessionTitle": "自我复盘",
+      "sessionId": "__待填__",
+      "pinTarget": [
+        "自我复盘"
+      ],
+      "col": 3,
+      "row": 4,
+      "w": 2,
+      "h": 2
+    }
+  ]
+}
