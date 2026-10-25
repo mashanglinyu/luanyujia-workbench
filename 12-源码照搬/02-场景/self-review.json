@@ -28,6 +28,7 @@
     },
     {
       "id": "sr-site-bl",
+      "_note": "分区由面板 id 决定 = persist:embed-sr-site-bl；顶栏 DeepSeek 按钮用同一分区 ⇒ 登录一次两边通用。别改这个面板 id。",
       "title": "AI·DeepSeek 网页版",
       "sub": "chat.deepseek.com · 内置网页",
       "type": "embed",

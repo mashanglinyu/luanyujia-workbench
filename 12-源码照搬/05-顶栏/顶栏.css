@@ -1,0 +1,75 @@
+/* ============================================================================
+   05-顶栏/顶栏.css —— 顶栏片段的样式（网页按钮 / 负载胶囊 / ⋯ 菜单 / 回退胶囊）
+   说明：外壳自己的顶栏样式通常在 styles.css；这里只补**本夹那几个片段**用到的类，
+        接到外壳时把它们并进你的样式文件即可（或单独 <link>）。
+   配色用 CSS 变量，跟随你的主题：--accent / --text / --muted / --line。
+============================================================================ */
+
+/* ── 五个网页端按钮 ─────────────────────────────────────────────── */
+.webai-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.webai-btn {
+  width: 26px; height: 26px;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0; border: 0; border-radius: 7px;
+  background: transparent; cursor: pointer;
+  color: var(--text, #e8ecf3); font-size: 12px; line-height: 1;
+  transition: background .15s ease, transform .12s ease;
+}
+.webai-btn img { width: 17px; height: 17px; display: block; border-radius: 4px; object-fit: contain; }
+.webai-btn:hover { background: rgba(255,255,255,.10); }
+.webai-btn:active { transform: scale(.94); }
+.webai-btn.noimg { background: rgba(255,255,255,.07); font-weight: 700; }
+.webai-btn.on { background: rgba(79,140,255,.18); box-shadow: inset 0 0 0 1px rgba(79,140,255,.45); }
+html[data-theme="light"] .webai-btn:hover { background: rgba(15,23,42,.07); }
+
+/* ── 负载胶囊：CPU / GPU / MEM ───────────────────────────────────── */
+.tbs-pill.tbs-load {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 26px; padding: 0 10px; margin-right: 6px;
+  border: 1px solid var(--line, rgba(255,255,255,.12));
+  border-radius: 999px; background: rgba(255,255,255,.04);
+  color: var(--text, #e8ecf3); font-size: 11.5px; cursor: default;
+  white-space: nowrap;
+}
+.tbs-load .tbs-txt { display: inline-flex; align-items: baseline; gap: 4px; }
+.tbs-load .tbs-k { color: var(--muted, #8b95a7); font-size: 10.5px; letter-spacing: .02em; }
+.tbs-load b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.tbs-load.warn { border-color: rgba(251,191,36,.45); }
+.tbs-load.warn b { color: #fbbf24; }
+.tbs-load.bad { border-color: rgba(248,113,113,.55); }
+.tbs-load.bad b { color: #f87171; }
+
+/* ── 回退胶囊 / ⋯ 菜单 ──────────────────────────────────────────── */
+.rb-chip {
+  height: 26px; padding: 0 9px; border-radius: 999px;
+  border: 1px solid var(--line, rgba(255,255,255,.12));
+  background: rgba(255,255,255,.04); color: var(--text, #e8ecf3);
+  font-size: 11.5px; font-variant-numeric: tabular-nums;
+}
+.rb-chip:not(:disabled):hover { background: rgba(255,255,255,.10); }
+
+.tb-more-panel {
+  position: absolute; right: 10px; top: 38px; z-index: 3000;
+  display: none; min-width: 210px; padding: 6px;
+  background: #141821; border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+html[data-theme="light"] .tb-more-panel {
+  background: #fff; border-color: rgba(15,23,42,.12); box-shadow: 0 10px 30px rgba(15,23,42,.14);
+}
+.tb-more-item {
+  display: block; width: 100%; text-align: left;
+  padding: 7px 10px; border: 0; border-radius: 6px;
+  background: transparent; color: inherit; font-size: 13px; cursor: pointer;
+}
+.tb-more-item:hover { background: rgba(255,255,255,.07); }
+html[data-theme="light"] .tb-more-item:hover { background: rgba(15,23,42,.06); }
+.tb-more-empty { padding: 8px 10px; color: var(--muted, #8b95a7); font-size: 12.5px; }
+
+/* ── 光效：见 发光标签.css（发光底条那版） ───────────────────────── */

@@ -1,0 +1,60 @@
+{
+  "id": "design-misc",
+  "name": "设计杂活",
+  "description": "设计杂活：左上预览文档/图片/HTML、右上盘内文件浏览（点路径可复制、图片视频直接显示）、左下项目管理（预留）、右下 AI 会话。做图标、配图、封面、抠图、改尺寸、转格式都在这里。",
+  "layout": "grid",
+  "theme": "dark",
+  "panels": [
+    {
+      "id": "dz-preview",
+      "title": "预览",
+      "type": "view",
+      "quickLinks": [
+        {
+          "label": "素材盘",
+          "launchPath": "<素材盘>\\"
+        }
+      ],
+      "col": 1,
+      "row": 1,
+      "w": 3,
+      "h": 2
+    },
+    {
+      "id": "dz-folder",
+      "title": "素材盘文件",
+      "type": "file",
+      "mode": "local",
+      "root": "<素材盘>\\",
+      "viewPanel": "dz-preview",
+      "col": 4,
+      "row": 1,
+      "w": 1,
+      "h": 2
+    },
+    {
+      "id": "dz-projects",
+      "title": "项目管理",
+      "type": "reserved",
+      "reserveNote": "项目管理（预留）：放这里的项目清单 —— 项目名 / 路径 / 状态 / 最近动过的文件，点一下就在左边预览里打开。",
+      "col": 1,
+      "row": 3,
+      "w": 1,
+      "h": 2
+    },
+    {
+      "id": "dz-ai",
+      "title": "AI·设计杂活",
+      "type": "harness",
+      "sessionTitle": "设计杂活",
+      "sessionId": "__待填__",
+      "pinTarget": [
+        "设计杂活"
+      ],
+      "col": 2,
+      "row": 3,
+      "w": 3,
+      "h": 2
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+node_modules/
+selftest.png
+dist/
+main.log
+out.log
+err.log
+config.local.json

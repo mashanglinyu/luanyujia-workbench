@@ -27,7 +27,7 @@
 |---|---|---|
 | `sr-doc` | 预览 | 左上大窗口：md / txt / 代码 / json / csv / 图片 / 视频 / 音频 / PDF / HTML / Office（转 PDF 内嵌）。**只看不拉起外部程序** |
 | `sr-files` | 库 | 右上文件树：点哪个文件，左边就预览哪个 |
-| `sr-site-bl` | AI·DeepSeek 网页版 | 左下内嵌网页，长文/查资料用它省 token |
+| `sr-site-bl` | AI·DeepSeek 网页版 | 左下内嵌网页：长文/查资料用它省 token。**登录态和顶栏 DeepSeek 按钮共用**（同一 webview 分区 `persist:embed-sr-site-bl`），登一次两边都通 |
 | `sr-ai` | AI·自我复盘 | 右下：你（本场景会话） |
 
 ## 四、记忆怎么用

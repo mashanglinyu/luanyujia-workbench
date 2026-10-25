@@ -1,0 +1,14 @@
+{
+  "name": "dsh-workbench-lite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "最小可运行工作台壳：三场景 + 顶栏片段（体验版）",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "selftest": "electron . --selftest"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0"
+  }
+}
