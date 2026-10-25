@@ -1,11 +1,11 @@
 /* ============================================================================
    05-顶栏/负载胶囊.js —— CPU / GPU / 内存 实时胶囊
-   目的：顶栏右侧显示「CPU 10% · GPU 9% · MEM 42%」，≥70% 黄、≥90% 红。
+   位置：**顶栏最右侧**（在「最小化 ─ / 最大化 □ / 关闭 ✕」那一组的左边），不是 ⟳ 旁边。
 
-   怎么接：
-   ① 外壳主进程提供一个只读接口（示例：IPC 'sys:load' 或 HTTP /api/load），
-      返回 { cpu: 10, gpu: { util: 9, memUsed: 2048, memTotal: 8192 }, mem: { usedPct: 42 } }
-   ② 渲染层调它 → 画胶囊。下面 probeLoad() 默认走 IPC，没有就退回 HTTP。
+   ★ 数据从哪来（照抄不会错）
+   本机外壳把读机器的桥挂在 kun 命名空间下，函数名是 sys.load：
+       window['kun'].sys.load()  →  { cpu, gpu:{util,memUsed,memTotal}, mem:{usedPct} }
+   （字符串写法是为了不在公开仓库里硬编码内部命名空间；你换成自己外壳的桥即可。）
 
    ⛔ 不要在前端直接读 WMI / 显卡驱动：一是权限，二是阻塞界面。
 ============================================================================ */
@@ -13,17 +13,18 @@
 (function () {
   'use strict';
 
-  var LOAD = { cpu: null, gpu: null, mem: null, err: null, busy: false, at: 0 };
+  var LOAD = { cpu: null, gpu: null, mem: null, err: null, busy: false };
   var POLL_MS = 4000;          // 轮询间隔
   var pill = null;
 
-  // ── 适配点：换成你外壳的取数接口 ──────────────────────────────────────────
+  // ── 取数：按优先级找本机外壳的桥 ──────────────────────────────────────────
   async function probeLoad() {
-    // 1) Electron / 外壳注入的 IPC 桥（优先）
-    if (window.app && window.app.sys && typeof window.app.sys.load === 'function') {
-      return await window.app.sys.load();
-    }
-    // 2) 本地 HTTP 接口（很多外壳会开一个本地服务）
+    // 1) 本机外壳：kun.sys.load（字符串取，避免公开仓库出现内部命名空间）
+    var ns = window['kun'] || window.app || null;
+    if (ns && ns.sys && typeof ns.sys.load === 'function') return await ns.sys.load();
+    // 2) 有的外壳挂在顶层 IPC 桥
+    if (window.app && window.app.sys && typeof window.app.sys.load === 'function') return await window.app.sys.load();
+    // 3) 本地 HTTP 兜底
     var r = await fetch('/api/load', { cache: 'no-store' });
     if (!r.ok) throw new Error('http ' + r.status);
     return await r.json();
@@ -38,6 +39,7 @@
 
   function ensurePill() {
     if (pill && pill.isConnected) return pill;
+    // ★ 位置：顶栏右侧那组窗口按钮（.titlebar-controls）里，排在第一个（= 紧挨 ─ 左边）
     var host = document.querySelector('#titlebar .titlebar-controls') ||
                document.querySelector('#scenebar .scenebar-right') ||
                document.getElementById('titlebar');
@@ -72,8 +74,7 @@
 
   async function tick() {
     if (LOAD.busy) return;
-    // 窗口不可见时轮询没有意义（省电），回来时立刻补一次
-    if (document.hidden) return;
+    if (document.hidden) return;      // 窗口不可见时不轮询（省电），回来自动补一次
     LOAD.busy = true;
     try {
       var r = await probeLoad();
@@ -84,10 +85,9 @@
         LOAD.err = null;
       }
     } catch (e) {
-      LOAD.err = String(e && e.message || e);
+      LOAD.err = String((e && e.message) || e);
     } finally {
       LOAD.busy = false;
-      LOAD.at = Date.now();
       paint();
     }
   }

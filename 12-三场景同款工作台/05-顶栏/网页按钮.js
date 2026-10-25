@@ -1,13 +1,12 @@
 /* ============================================================================
    05-顶栏/网页按钮.js —— 在顶栏注入「5 个网页端按钮」
-   目的：和原版一样，品牌名右边排 5 个官网图标，点一下开一个内置窗口，再点收起。
+   目的：品牌名右边排 5 个官网图标，点一下开一个内置窗口，再点收起。
 
-   怎么接（两种外壳都适用）：
-   ① 你的渲染器支持「窗口内开 webview」：把 openSite(key) 换成你外壳的接口
-      （原版是 window.__appWebAiOpen(key)，各外壳不同，见文件末尾「适配点」）。
-   ② 不支持 webview 的外壳：会退回用系统浏览器打开（默认行为），不至于点了没反应。
+   ★ 桥的名字（照抄不会错）
+   本机外壳暴露的是：window.__kunWebAiToggle(key) / window.__kunWebAiOpen(key)
+   （不同外壳可能叫别的名字；下面 openSite() 里按优先级依次试，最后才退回系统浏览器）
 
-   用法：在外壳渲染器加载完后调用一次 decorateWebAi()；
+   用法：外壳渲染器加载完后调用一次 decorateWebAi()；
         场景刷新会重跑，函数里做了幂等（不会插第二排）。
 ============================================================================ */
 
@@ -23,12 +22,15 @@
     { key: 'kimi',     name: 'Kimi',     icon: 'assets/webai/kimi.png',     url: 'https://kimi.moonshot.cn/' }
   ];
 
-  // ── 适配点：把这里换成你外壳"打开内置网页窗口"的能力 ─────────────────────
+  // ── 适配点：按优先级找"能开内置窗口"的桥 ──────────────────────────────────
   function openSite(key, url) {
-    // 1) 外壳提供的能力（优先）
-    if (typeof window.__appWebAiToggle === 'function') return window.__appWebAiToggle(key);
+    // 1) 本机外壳的桥（切换/打开）
+    if (typeof window.__kunWebAiToggle === 'function') return window.__kunWebAiToggle(key);
+    if (typeof window.__kunWebAiOpen === 'function') return window.__kunWebAiOpen(key);
+    // 2) 其它外壳常见写法
     if (typeof window.__appWebAiOpen === 'function') return window.__appWebAiOpen(key);
-    // 2) 没有能力 ⇒ 退回系统浏览器（不会静默失败）
+    if (window.app && typeof window.app.openWebAi === 'function') return window.app.openWebAi(key);
+    // 3) 都没有 ⇒ 退回系统浏览器（不会静默失败）
     if (typeof window.__openExternal === 'function') return window.__openExternal(url);
     window.open(url, '_blank', 'noopener');
   }
