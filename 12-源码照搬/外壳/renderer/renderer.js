@@ -1063,7 +1063,7 @@ async function init() {
   // 先显示启动加载页（带进度条），引擎就绪后再渲染这个场景 —— 早了 AI 面板会拿到没 token 的地址。
   if (soloSceneId) {
     const hit = list.filter(s => s.id === soloSceneId)[0];
-    const winTitle = ((hit && hit.name) || soloSceneId) + ' · <机主>的工作台';
+    const winTitle = ((hit && hit.name) || soloSceneId) + ' · 淋雨家的工作台';
     try { document.title = winTitle; } catch (e) { /* ignore */ }
     const brand = document.querySelector('.brand-name');
     if (brand) brand.textContent = winTitle;

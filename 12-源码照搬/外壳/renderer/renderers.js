@@ -11548,7 +11548,7 @@ function decorateBrand() {
 }
 
 // ===== 顶栏「网页版 AI」：五个官方小图标 + 点开的浮动窗口（2026-09-20 第四波 / 第五波补 DeepSeek）=====
-// 用户原话：「把这四个网页版内置到 gui 窗口最顶上，<机主>的工作台字段后面，用一个个官方小图标
+// 用户原话：「把这四个网页版内置到 gui 窗口最顶上，淋雨家的工作台字段后面，用一个个官方小图标
 // 显示，点击就可以出来一个窗口，保证快速响应」。
 //
 // ★为什么整段都在这里、一行 index.html 都不改★
@@ -11966,7 +11966,7 @@ function webAiMarkOn() {
   } catch (e) { /* ignore */ }
 }
 
-// 顶栏那五个图标（插在「<机主>的工作台」字段后面；✕ 幂等：⟳ 重跑不会插第二排）
+// 顶栏那五个图标（插在「淋雨家的工作台」字段后面；✕ 幂等：⟳ 重跑不会插第二排）
 function decorateWebAi() {
   try {
     const drag = document.querySelector('#titlebar .titlebar-drag');
@@ -15136,8 +15136,8 @@ renderers['site-media'] = (body, meta, head) => {
   body.classList.add('site-media');
   const MEDIA = [
     { name: '哔哩哔哩', handle: '@<机主>', emoji: '📺', url: 'https://<你的B站主页>', qr: '/账号二维码/哔哩哔哩.jpg' },
-    { name: '抖音', handle: '@<机主>（蛋炒饭里悟真我）', emoji: '🎵', url: 'https://www.douyin.com/user/MS4wLjABAAAAV55NIdPri0csj-Gwi0vT4Yuuest0zIvnTZGxe2K3YAXuESpAombXp397aY98jDq-', qr: '/账号二维码/抖音.png' },
-    { name: '小红书', handle: '@<机主>', emoji: '📕', url: 'https://www.xiaohongshu.com/user/profile/64be86b700000000140342cb', qr: '/账号二维码/小红书.png' }
+    { name: '抖音', handle: '@<你的抖音账号>', emoji: '🎵', url: 'https://<你的抖音主页>', qr: '/账号二维码/抖音.png' },
+    { name: '小红书', handle: '@<机主>', emoji: '📕', url: 'https://<你的小红书主页>', qr: '/账号二维码/小红书.png' }
   ];
   siteBase().then(function (base) {
     const grid = el('div', 'site-media-grid');
@@ -15244,7 +15244,7 @@ renderers['site-urls'] = (body, meta, head) => {
     },
     // ── 两个公开仓库（各自的 GitHub 卡片）──
     {
-      icon: '/img/panel/workbench.png', name: '<机主>的工作台',
+      icon: '/img/panel/workbench.png', name: '淋雨家的工作台',
       links: [{ label: 'GitHub', url: 'https://github.com/<你的GitHub账号>/<仓库名>' }]
     },
     {

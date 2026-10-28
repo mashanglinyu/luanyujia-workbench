@@ -654,8 +654,8 @@ function collectSiteContext() {
     title: '<机主> | <机主> · 个人站',
     accounts: [
       { name: '哔哩哔哩', handle: '@<机主>', url: 'https://<你的B站主页>' },
-      { name: '抖音', handle: '@<机主>（蛋炒饭里悟真我）', url: 'https://www.douyin.com/user/MS4wLjABAAAAV55NIdPri0csj-Gwi0vT4Yuuest0zIvnTZGxe2K3YAXuESpAombXp397aY98jDq-' },
-      { name: '小红书', handle: '@<机主>', url: 'https://www.xiaohongshu.com/user/profile/64be86b700000000140342cb' }
+      { name: '抖音', handle: '@<你的抖音账号>', url: 'https://<你的抖音主页>' },
+      { name: '小红书', handle: '@<机主>', url: 'https://<你的小红书主页>' }
     ],
     email: '<邮箱>',
     siteUrl: 'http://127.0.0.1:' + SITE_PORT + '/index.html'
@@ -706,7 +706,7 @@ function createWindow(opts) {
     height: bounds.height,
     minWidth: 1000,
     minHeight: 660,
-    title: isMain ? 'DSH 引擎' : (sceneNameOf(scene) + ' · <机主>的工作台'),
+    title: isMain ? 'DSH 引擎' : (sceneNameOf(scene) + ' · 淋雨家的工作台'),
     autoHideMenuBar: true,
     frame: false,
     backgroundColor: '#0b0d12',
