@@ -1,0 +1,32 @@
+{
+ "areas": [
+  {
+   "panel": "cmd-chat",
+   "scene": "命令",
+   "privateMemory": [
+    "命令\\场景私有记忆.md"
+   ]
+  },
+  {
+   "panel": "bv-ai",
+   "scene": "B站",
+   "privateMemory": [
+    "B站\\场景私有记忆.md"
+   ]
+  },
+  {
+   "panel": "sr-ai",
+   "scene": "自我复盘",
+   "privateMemory": [
+    "自我复盘\\场景私有记忆.md"
+   ]
+  },
+  {
+   "panel": "pc-ai",
+   "scene": "本地电脑",
+   "privateMemory": [
+    "本地电脑\\场景私有记忆.md"
+   ]
+  }
+ ]
+}

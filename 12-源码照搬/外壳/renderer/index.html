@@ -1,103 +1,123 @@
-<!doctype html>
-<html lang="zh-CN" data-theme="dark">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>淋雨家的工作台</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <!-- ⚠ CSP 里的 img/media/frame 必须放行 file:（2026-09-26 实测踩到）：
+       本页面自身是 file:// 加载的，而 file:// 在 Chromium 里是 **opaque origin** ⇒ `'self'` 匹配不上，
+       本地图片 / 视频 / 音频 / HTML 预览 / PDF 会**全部**被 CSP 拦掉（表现：一片"破图"占位符）。
+       放行范围只到 file:，script-src 仍是 'self'（不外链、不 eval）。 -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: file: http://127.0.0.1:31238; media-src 'self' data: blob: file:; frame-src 'self' file: http://127.0.0.1:3080 http://127.0.0.1:31238;">
+  <title>DSH 引擎 · <机主>的工作台</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-<div id="boot-overlay" data-anim="ideal">
-  <div class="boot-card">
-    <div class="boot-logo"></div>
-    <div class="boot-title" style="display:none">DeepSeek Harness</div>
-    <div class="boot-stage" id="boot-stage">正在启动…</div>
-    <div class="boot-meta"><span id="boot-pct">0%</span><span id="boot-detail">BOOT</span></div>
-  </div>
-  <div class="boot-bar"><i id="boot-bar-in"></i></div>
-</div>
-  </div>
-</div>
-
-<!-- ① 顶栏 -->
-<header id="titlebar">
-  <div class="titlebar-drag">
-    <span class="brand">淋雨家的工作台 <span class="brand-ver" id="ver">v0.1</span></span>
-    <span id="webai-strip" class="webai-strip"></span>
-  </div>
-  <div class="titlebar-controls">
-    <button id="tbs-load" class="tbs-pill tbs-load" title="本机负载">CPU — · GPU — · MEM —</button>
-    <button id="btn-folder" class="folder-chip" title="打开工作文件夹">📁 文件夹</button>
-    <div class="tb-group" id="tb-group-ext" title="扩展：插件 / 技能 / MCP / 工具">
-      <button class="tb-btn" id="btn-plugins" title="插件：打开插件目录">🧩</button>
-      <button class="tb-btn" id="btn-skills" title="技能：打开技能目录">✨</button>
-      <button class="tb-btn" id="btn-mcp" title="MCP：本壳不读引擎配置">🔌<i class="tb-badge">0</i></button>
-      <button class="tb-btn" id="btn-tools" title="工具：打开工具目录">🛠</button>
+  <!-- 自定义标题栏（无边框窗口） -->
+  <header id="titlebar">
+    <div class="titlebar-drag">
+      <span class="brand">
+        <span class="brand-dot" id="brand-dot"></span>
+        <span class="brand-name">DSH 引擎 · <机主>的工作台</span>
+        <!-- 悬停左上角品牌区显示的版本信息卡（内容由 renderer.js 从 main.js 的 app:version 填入）
+             ⚠ 用 position:fixed 定位：.titlebar-drag 带 overflow:hidden，普通绝对定位会被裁掉 -->
+        <span class="brand-tip" id="brand-tip" role="tooltip">
+          <span class="brand-tip-line brand-tip-title">DSH 引擎 <b id="ver-engine">—</b></span>
+          <span class="brand-tip-line">工作台 GUI <b id="ver-gui">—</b></span>
+          <span class="brand-tip-line" id="ver-runtime">运行时 —</span>
+          <span class="brand-tip-line brand-tip-dim" id="ver-dir">引擎目录 —</span>
+        </span>
+      </span>
     </div>
-    <button id="rb-chip" class="tb-btn rb-chip" disabled>回退：未接入</button>
-    <button class="tb-btn" id="btn-refresh" title="刷新场景">⟳</button>
-    <button class="tb-btn" id="btn-more" title="更多">⋯</button>
-    <span class="tb-sep"></span>
-    <button class="tb-btn" id="btn-min">─</button>
-    <button class="tb-btn" id="btn-max">□</button>
-    <button class="tb-btn tb-close" id="btn-close">✕</button>
-    <div id="tb-more-panel" class="tb-more-panel">
-      <button class="tb-more-item" data-act="onboard">配置引导</button>
-      <button class="tb-more-item" data-act="theme-cycle">外观：深色（点击切换）</button>
-      <button class="tb-more-item" data-act="tabnum">窗口序号：关</button>
-      <button class="tb-more-item" data-act="ver">版本信息</button>
-      <button class="tb-more-item" data-act="mem">初始化记忆模板</button>
-      <button class="tb-more-item" data-act="dir">打开场景目录</button>
+    <div class="titlebar-controls">
+      <button class="tb-btn tb-tools" id="btn-theme" title="外观：深色 / 浅色 / 跟随系统">🌙</button>
+      <span class="tb-sep"></span>
+      <button class="tb-btn tb-tools" id="btn-refresh" title="刷新当前场景（热更新渲染器，不影响 Harness 对话）">⟳</button>
+      <button class="tb-btn tb-tools" id="btn-plugins" title="查看已安装插件">🧩</button>
+      <button class="tb-btn tb-tools" id="btn-skills" title="技能（Skills）：查看 / 打开技能目录"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5113 15.4067C12.4395 15.6249 12.1308 15.6249 12.059 15.4067L11.643 14.1416C11.454 13.567 11.0033 13.1164 10.4288 12.9274L9.16369 12.5113C8.94544 12.4395 8.94544 12.1308 9.16369 12.059L10.4288 11.643C11.0033 11.454 11.454 11.0033 11.643 10.4288L12.059 9.16369C12.1308 8.94544 12.4395 8.94544 12.5113 9.16369L12.9274 10.4288C13.1164 11.0033 13.567 11.454 14.1416 11.643L15.4067 12.059C15.6249 12.1308 15.6249 12.4395 15.4067 12.5113L14.1416 12.9274C13.567 13.1164 13.1164 13.567 12.9274 14.1416L12.5113 15.4067Z" fill="currentColor"/><path d="M9.02246 0.546878C9.9822 0.546878 10.7564 0.545403 11.374 0.612307C12.0042 0.680586 12.5515 0.826244 13.0273 1.17188C13.3052 1.37376 13.5501 1.61868 13.752 1.89649C14.0975 2.37225 14.2432 2.91984 14.3115 3.54981C14.3784 4.16727 14.377 4.94206 14.377 5.90137V8.51367C13.9611 8.29533 13.5071 8.13985 13.0273 8.06055V5.90137C13.0273 4.9121 13.0259 4.22322 12.9688 3.69532C12.9129 3.18044 12.8098 2.89782 12.6592 2.69043C12.5406 2.52724 12.3966 2.38326 12.2334 2.26465C12.026 2.11404 11.7437 2.0109 11.2285 1.95508C10.7005 1.89789 10.0122 1.89649 9.02246 1.89649H6.55371C5.56395 1.89649 4.87569 1.89787 4.34766 1.95508C3.83242 2.01092 3.55022 2.11398 3.34278 2.26465C3.17953 2.38329 3.03564 2.52719 2.91699 2.69043C2.76642 2.89782 2.66325 3.18042 2.60742 3.69532C2.55027 4.22322 2.54883 4.9121 2.54883 5.90137V10.0986C2.54883 11.0878 2.55031 11.7768 2.60742 12.3047C2.66326 12.8196 2.76642 13.1032 2.91699 13.3105C3.03558 13.4736 3.17966 13.6178 3.34278 13.7363C3.5502 13.8869 3.83265 13.9901 4.34766 14.0459C4.87568 14.1031 5.56398 14.1035 6.55371 14.1035H8.08399C8.27443 14.6025 8.55077 15.0585 8.89551 15.4541H6.55371C5.59402 15.4541 4.81976 15.4546 4.20215 15.3877C3.57204 15.3194 3.02468 15.1738 2.54883 14.8281C2.27111 14.6263 2.02606 14.3813 1.82422 14.1035C1.47883 13.6278 1.33293 13.08 1.26465 12.4502C1.19783 11.8327 1.19922 11.0579 1.19922 10.0986V5.90137C1.19922 4.94206 1.1978 4.16727 1.26465 3.54981C1.33295 2.91984 1.47867 2.37225 1.82422 1.89649C2.02613 1.61864 2.27098 1.37379 2.54883 1.17188C3.02472 0.826181 3.57197 0.6806 4.20215 0.612307C4.81976 0.545393 5.594 0.546877 6.55371 0.546878H9.02246ZM9.19629 9.14649H4.5459V7.84571H9.19629V9.14649ZM11.0303 6.10645H4.5459V4.80567H11.0303V6.10645Z" fill="currentColor"/></svg></button>
+      <button class="tb-btn tb-tools" id="btn-tools" title="工具（Tools）：查看引擎原有与新增工具，带位置和大白话说明">🛠</button>
+      <button class="tb-btn tb-tools" id="btn-models" title="查看模型与提供方">🤖</button>
+      <button class="tb-btn tb-tools" id="btn-market" title="DSH 集市" data-url="https://www.mydsh.xyz/">🛍</button>
+      <button class="tb-btn tb-tools" id="btn-donate" title="赞助小鱼干" data-url="https://linyujia.me/#donate">🐟</button>
+      <span class="tb-sep"></span>
+      <button class="tb-btn" id="btn-min" title="最小化">─</button>
+      <button class="tb-btn" id="btn-max" title="最大化">□</button>
+      <button class="tb-btn tb-close" id="btn-close" title="关闭">✕</button>
+    </div>
+  </header>
+
+  <!-- 场景切换栏（独立组件） -->
+  <header id="scenebar">
+    <div class="scenebar-inner">
+      <span class="scenebar-label">工作台</span>
+      <div class="scenebar-sep"></div>
+      <nav id="scenario-tabs"></nav>
+      <div class="scenebar-right">
+        <button id="balance-chip" class="balance-chip" title="DeepSeek 余额 · 点击打开用量页">¥ …</button>
+        <span id="status-dot" class="status-dot"></span>
+        <span id="status-text">连接中…</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 场景 0：内嵌 DSH 引擎（默认初始界面） -->
+  <section id="harness-view" class="view active">
+    <webview id="harness-webview"
+             class="harness-webview"
+             allowpopups
+             partition="persist:harness"></webview>
+    <!-- 启动加载页：引擎启动进度（加载不出来时也始终有进度条 + 重试） -->
+    <div id="boot-overlay" class="boot-overlay">
+      <div class="boot-card">
+        <div class="boot-logo"></div>
+        <div class="boot-title">DSH 引擎</div>
+        <div class="boot-stage" id="boot-stage">正在启动引擎…</div>
+        <div class="boot-bar"><div class="boot-bar-in" id="boot-bar-in"></div></div>
+        <div class="boot-meta">
+          <span id="boot-pct">0%</span>
+          <span id="boot-detail">—</span>
+        </div>
+        <div class="boot-actions">
+          <button id="boot-refresh" class="boot-btn">⟳ 立即进入</button>
+          <button id="boot-retry" class="boot-retry" style="display:none">🔄 重试启动</button>
+        </div>
+        <div class="boot-hint">首次启动较慢；点「立即进入」可直接进入界面（等同切场景再切回来）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 场景 1/2：本地渲染场景（OA 运维 / 股票助手） -->
+  <section id="scenario-view" class="view">
+    <div id="grid"></div>
+    <!-- ⚠ 2026-09-20 起这段底栏**运行时不显示**：里面的「序号：开/关」被 renderers.js 的
+         moveSceneToggleToTopbar() 连节点一起搬进顶栏（.titlebar-controls，排在「⟳」右边），
+         这个 <footer> 整个从 DOM 摘掉，腾出的高度给 #grid（见 项目信息.md §24.6）。
+         标记保留是为了「外壳装饰一律放 renderers.js」——改这块不用重启 GUI。 -->
+    <footer id="scenario-footer">
+      <div class="sf-inner">
+        <span class="sf-label">菜单</span>
+        <button id="sf-badges" class="sf-btn" title="显示/隐藏窗口序号徽标">序号：关</button>
+      </div>
+    </footer>
+  </section>
+
+  <!-- 插件 / 模型 弹窗 -->
+  <div id="modal-mask" class="modal-mask" style="display:none">
+    <div class="modal">
+      <div class="modal-head">
+        <span id="modal-title" class="modal-title"></span>
+        <button class="modal-close" id="modal-close" title="关闭">✕</button>
+      </div>
+      <div id="modal-body" class="modal-body"></div>
     </div>
   </div>
-</header>
 
-<!-- ② 场景切换条 -->
-<header id="scenebar">
-  <span class="scenebar-label">工作台</span>
-  <nav id="scenario-tabs"></nav>
-  <div class="scenebar-right">
-    <button id="balance-chip" class="balance-chip" title="DeepSeek 余额">¥ …</button>
-    <span id="status-dot" class="status-dot"></span>
-    <span id="status-text">连接中…</span>
-  </div>
-</header>
-
-<!-- ③ 引擎视图（默认界面 = DeepSeek Harness 原始界面） -->
-<section id="engine-view" class="view active">
-  <webview id="engine-webview" src="about:blank" partition="persist:harness" allowpopups></webview>
-  <div id="engine-off" class="engine-off">
-    <div class="engine-off-card">
-      <b>引擎没启动（或地址不对）</b>
-      <p id="engine-off-url">—</p>
-      <p>先在终端把 DSH 跑起来（例如 <code>dsh web</code>），再点下面重试。</p>
-      <button id="engine-retry" class="tb-btn" style="border:1px solid var(--line);padding:6px 14px">⟳ 重试</button>
-    </div>
-  </div>
-</section>
-
-<!-- ④ 场景视图 -->
-<section id="scenario-view" class="view">
-  <div id="grid"></div>
-</section>
-
-<script src="app.js"></script>
-<div id="onboard" class="onboard-mask" style="display:none">
-  <div class="onboard-card">
-    <h3>先把这套接上你自己的 DSH（3 步）</h3>
-    <ol>
-      <li><b>复制提示词</b>：点下面的按钮，粘给你自己的 DSH，让它替你填配置、建会话。</li>
-      <li><b>重启外壳</b>：关掉这个窗口重新打开。</li>
-      <li><b>看绿点</b>：顶栏出现「Harness 已连接」就成功了。</li>
-    </ol>
-    <div class="onboard-actions">
-      <button id="ob-copy" class="tb-btn primary">复制给 DSH 的提示词</button>
-      <button id="ob-guide" class="tb-btn">打开《引导.md》</button>
-      <button id="ob-close" class="tb-btn">我已填好，知道了</button>
-    </div>
-    <p class="onboard-note">这 4 样只写进你本机的 config.local.json 和 scenarios，不会上传。</p>
-  </div>
-</div>
+  <script data-hr="sector-data.js" src="sector-data.js"></script>
+  <script data-hr="us-sector-data.js" src="us-sector-data.js"></script>
+  <script id="renderers-script" src="renderers.js"></script>
+  <script src="renderer.js"></script>
+  <!-- 顶栏状态区（2026-10-16 新增 · 压力灯 / 谁在等我 / 快照回滚）：纯增量，不动上面任何脚本 -->
+  <script src="topbar-status.js"></script>
+  <script src="public-clean.js"></script>
+  <script src="public-links.js"></script>
 </body>
 </html>

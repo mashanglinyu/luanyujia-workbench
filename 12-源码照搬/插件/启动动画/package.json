@@ -1,0 +1,12 @@
+{
+  "name": "dsh-plugin-boot-anim",
+  "version": "1.1.0",
+  "private": true,
+  "description": "启动动画插件：设置里管理/选择启动动画；只有「预览当前」触发预览，卡片点选不再自动播放（配置落 外壳\\data\\boot-animation.json，预览经 外壳\\data\\boot-preview.json）。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": { ".": { "default": "./lib/index.js" }, "./client": "./client/client.js", "./package.json": "./package.json" },
+  "files": ["lib/index.js", "client/client.js", "README.md"],
+  "dsh": { "client": { "inject": ["@deepseek-ai/dsh-client-ui-settings"], "platform": "web" } },
+  "license": "MIT"
+}

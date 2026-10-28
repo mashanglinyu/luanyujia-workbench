@@ -1,60 +1,59 @@
 {
-  "id": "self-review",
-  "name": "自我复盘",
-  "description": "自我复盘：右上角浏览自己资料文件夹的文件树；左上角大窗口只在这里预览（md 渲染、txt/代码/json/csv 原文、图片可滚轮缩放、视频/音频、PDF、HTML 内嵌、Word/Excel/PPT 转 PDF 后内嵌）；左下角内嵌网页版 AI，右下角 AI 会话面板。默认 4 列网格：上排 3+1（预览 75% / 文件树 25%），下排 2+2。",
-  "layout": "grid",
-  "theme": "dark",
-  "panels": [
-    {
-      "id": "sr-doc",
-      "title": "预览",
-      "sub": "点右上的文件就在此预览；要改才用这排的 🖥 打开系统程序",
-      "type": "review-doc",
-      "col": 1,
-      "row": 1,
-      "w": 3,
-      "h": 3
-    },
-    {
-      "id": "sr-files",
-      "title": "库",
-      "sub": "",
-      "type": "review-files",
-      "root": "<个人资料目录>",
-      "col": 4,
-      "row": 1,
-      "w": 1,
-      "h": 3
-    },
-    {
-      "id": "sr-site-bl",
-      "_note": "分区由面板 id 决定 = persist:embed-sr-site-bl；顶栏 DeepSeek 按钮用同一分区 ⇒ 登录一次两边通用。别改这个面板 id。",
-      "title": "AI·DeepSeek 网页版",
-      "sub": "chat.deepseek.com · 内置网页",
-      "type": "embed",
-      "url": "https://chat.deepseek.com/",
-      "userAgent": "chrome",
-      "expand": true,
-      "failHint": "先确认这台机器能上网（面板里就是普通网页，不经过工作台）。还不行就点「🌐 浏览器打开」。",
-      "offHint": "已把这个网页摘掉（省一份进程）。点「🔗 内置」切回来，登录状态记在面板自己的分区里。",
-      "col": 1,
-      "row": 4,
-      "w": 2,
-      "h": 2
-    },
-    {
-      "id": "sr-ai",
-      "title": "AI·自我复盘",
-      "type": "harness",
-      "sessionTitle": "自我复盘",
-      "sessionId": "__待填__",
-      "pinTarget": [
-        "自我复盘"
-      ],
-      "col": 3,
-      "row": 4,
-      "w": 2,
-      "h": 2
-    }
-  ]
+ "id": "self-review",
+ "name": "自我复盘",
+ "description": "自我复盘：右上角浏览 <工作台>\\自我复盘 的文件树；左上角大窗口**不管单击、双击还是怎么点，都只在这里预览**（md 渲染、txt/代码/json/csv 原文、图片可滚轮缩放、视频/音频、PDF、HTML 内嵌、Word/Excel/PPT 转成 PDF 后内嵌），**只有左边预览面板工具栏那个「🖥 系统默认程序打开」才会拉起外部程序**；真的看不了的（压缩包/PSD/可执行文件）给提示卡。左下角内嵌 DeepSeek 网页版（可点 ▲ 向上展开），右下角 AI 面板（内置会话「自我复盘」，同 ▲ 展开）。默认 4 列网格：上排 3+1（文件预览 75% / 库 25%），下排 2+2（网页版与 AI 各占一半）。",
+ "layout": "grid",
+ "theme": "dark",
+ "panels": [
+  {
+   "id": "sr-doc",
+   "title": "预览",
+   "sub": "点右上的文件就在此预览（Word / Excel / PPT / PDF 都能内嵌看；要改才用这排的 🖥 打开系统程序）",
+   "type": "review-doc",
+   "col": 1,
+   "row": 1,
+   "w": 3,
+   "h": 3
+  },
+  {
+   "id": "sr-files",
+   "title": "库",
+   "sub": "",
+   "type": "review-files",
+   "col": 4,
+   "row": 1,
+   "w": 1,
+   "h": 3
+  },
+  {
+   "id": "sr-site-bl",
+   "title": "AI·DeepSeek 网页版",
+   "sub": "chat.deepseek.com · 内置网页",
+   "type": "embed",
+   "url": "https://chat.deepseek.com/",
+   "userAgent": "chrome",
+   "expand": true,
+   "failHint": "先确认这台机器能上网（面板里就是普通的网页，不经过工作台）。还不行就点「🌐 浏览器打开」在系统浏览器里看。",
+   "offHint": "已把这个网页摘掉（省一份 guest 进程）。点「🔗 内置」切回来——登录状态记在这个面板自己的分区里（persist:embed-sr-site-bl），切回来不用重新登录。",
+   "col": 1,
+   "row": 4,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "id": "sr-ai",
+   "title": "AI·自我复盘",
+   "type": "harness",
+   "sessionTitle": "自我复盘",
+   "sessionId": "__待填__",
+   "pinTarget": [
+    "自我复盘"
+   ],
+   "col": 3,
+   "row": 4,
+   "w": 2,
+   "h": 2
+  }
+ ],
+ "first": false
 }

@@ -1,0 +1,10 @@
+{
+ "id": "classic",
+ "available": [
+  {
+   "id": "classic",
+   "name": "经典",
+   "desc": "鲸鱼 logo + 标题 + 阶段文字 + 进度条"
+  }
+ ]
+}

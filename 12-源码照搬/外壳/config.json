@@ -1,5 +1,0 @@
-{
-  "engineUrl": "http://127.0.0.1:3080/",
-  "engineToken": "",
-  "_note": "engineUrl 填 dsh web 打印的地址；engineToken 填那串 token（也可直接写在 engineUrl 里）。想不提交本机配置就写 config.local.json。"
-}

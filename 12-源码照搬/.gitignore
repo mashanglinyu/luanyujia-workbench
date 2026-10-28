@@ -1,0 +1,29 @@
+# 依赖
+node_modules/
+.DS_Store
+*.7z
+*.zip
+_临时/
+发布/
+
+# 引擎数据（用户自己的，不入库）
+引擎数据/.dsh/sessions/
+引擎数据/.dsh/storages/
+引擎数据/.dsh/profiles/web/
+引擎数据/.dsh/.credentials.yaml
+引擎数据/.dsh/.anonymous-user-id
+
+# 工作台运行时
+外壳/data/electron-profile/
+外壳/data/crash-state.json
+外壳/data/start-guard.json
+外壳/data/updater-state.json
+外壳/data/version-policy-state.json
+外壳/data/windows.json
+外壳/data/sidebar-state.json
+外壳/data/boot-preview.json
+外壳/server.log
+外壳/captures/
+
+# 记忆内部层（保留骨架，不提交个人内容）
+引擎数据/.dsh/场景记忆/*/归档/*.md

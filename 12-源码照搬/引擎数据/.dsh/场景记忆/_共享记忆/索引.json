@@ -1,0 +1,36 @@
+{
+ "areas": [
+  {
+   "id": "command",
+   "name": "命令",
+   "owner": "cmd-chat",
+   "memory": "场景记忆/命令",
+   "file": "areas/command.md",
+   "panel": "cmd-chat"
+  },
+  {
+   "id": "bilibili",
+   "name": "B站",
+   "owner": "bv-ai",
+   "memory": "场景记忆/B站",
+   "file": "areas/bilibili.md",
+   "panel": "bv-ai"
+  },
+  {
+   "id": "self-review",
+   "name": "自我复盘",
+   "owner": "sr-ai",
+   "memory": "场景记忆/自我复盘",
+   "file": "areas/self-review.md",
+   "panel": "sr-ai"
+  },
+  {
+   "id": "pc-cleanup",
+   "name": "本地电脑",
+   "owner": "pc-ai",
+   "memory": "场景记忆/本地电脑",
+   "file": "areas/pc-cleanup.md",
+   "panel": "pc-ai"
+  }
+ ]
+}
