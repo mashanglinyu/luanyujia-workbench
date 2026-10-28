@@ -1,0 +1,4 @@
+# 公开模板 patch：只挂「启动动画」
+- insert:
+    - id: boot-anim-host
+      name: dsh-plugin-boot-anim

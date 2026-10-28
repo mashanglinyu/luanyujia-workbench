@@ -48,9 +48,6 @@ function rotateLog() {
 }
 rotateLog();
 const SCENARIOS_DIR = path.join(__dirname, 'scenarios');
-const stockStore = require('./stock-store');
-const oaStore = require('./oa-store');   // OA 运维场景专属存储（D 盘 data/oa.db，与股票完全隔离）
-const oaSsh = require('./oa-ssh');       // OA 运维场景 SSH 通道（paramiko 桥接，密码走 SSH_PASS/配置）
 
 // ---- 个人站场景：官网静态服务（<工作台> → http://127.0.0.1:SITE_PORT）----
 const SITE_DIR = '<工作台>';
@@ -1939,6 +1936,11 @@ function releaseBlenderEmbedSync() {
 
 // 工作区文件浏览（只允许 BLENDER_DIR 内）
 
+// 公开版：OA / 行情 / SSH 业务实现不随包发布（保留空桩，等价于「未连接 / 无数据」）
+function __stubModule() { return new Proxy(function () {}, { get: () => () => undefined, apply: () => undefined }); }
+const stockStore = __stubModule();
+const oaStore = __stubModule();
+const oaSsh = __stubModule();
 // ===== app-window：把任意工业软件窗口内置成面板（2026-10-28 · 客户「<客户>」）=====
 // 与 blender 的 owner-overlay 同一套思路（见 scripts\app-embed-agent.ps1 头部：⛔ 不用 SetParent）。
 // 差异：目标进程名由渲染器传进来（Proc），一次只服务一个进程（换进程就重启 agent）。

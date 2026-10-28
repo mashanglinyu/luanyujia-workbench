@@ -9,7 +9,11 @@ _临时/
 # 引擎数据（用户自己的，不入库）
 引擎数据/.dsh/sessions/
 引擎数据/.dsh/storages/
-引擎数据/.dsh/profiles/web/
+引擎数据/.dsh/profiles/web/*
+!引擎数据/.dsh/profiles/web/cordis.yml
+!引擎数据/.dsh/profiles/web/cordis.patch.yml
+!引擎数据/.dsh/profiles/web/package.json
+!引擎数据/.dsh/profiles/web/pnpm-workspace.yaml
 引擎数据/.dsh/.credentials.yaml
 引擎数据/.dsh/.anonymous-user-id
 
