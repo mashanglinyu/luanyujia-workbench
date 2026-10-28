@@ -27,13 +27,13 @@
   <text x="104" y="138" font-size="15" fill="#c7d5e8">宿主 → 宪法 → 共享层 → 场景 → 项目 → 运行时 · 记忆在文件里，不在会话里</text>
   <g font-size="12.5" fill="#0f172a">
     <rect x="1130" y="76" width="170" height="30" rx="15" fill="#e8f5ee" stroke="#86c7a4"/>
-    <text x="1215" y="96" text-anchor="middle" fill="#15803d" font-weight="700">15 个场景</text>
+    <text x="1215" y="96" text-anchor="middle" fill="#15803d" font-weight="700">场景 · 随版本</text>
     <rect x="1315" y="76" width="180" height="30" rx="15" fill="#eaf1ff" stroke="#9db6e8"/>
-    <text x="1405" y="96" text-anchor="middle" fill="#1d4ed8" font-weight="700">27 个项目</text>
+    <text x="1405" y="96" text-anchor="middle" fill="#1d4ed8" font-weight="700">项目 · 按清单</text>
     <rect x="1130" y="116" width="170" height="30" rx="15" fill="#fff4e5" stroke="#e2b779"/>
-    <text x="1215" y="136" text-anchor="middle" fill="#a16207" font-weight="700">126 个工具</text>
+    <text x="1215" y="136" text-anchor="middle" fill="#a16207" font-weight="700">工具 · 数十个</text>
     <rect x="1315" y="116" width="180" height="30" rx="15" fill="#f2ecff" stroke="#b9a3e8"/>
-    <text x="1405" y="136" text-anchor="middle" fill="#6d28d9" font-weight="700">25 技能 · 12 插件</text>
+    <text x="1405" y="136" text-anchor="middle" fill="#6d28d9" font-weight="700">技能/插件 · 十余个</text>
   </g>
 
   <!-- 左列：六层 -->
@@ -44,7 +44,7 @@
     <circle cx="122" cy="228" r="23" fill="#0f172a"/>
     <text x="122" y="234" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">L0</text>
     <text x="164" y="226" font-size="21" font-weight="700" fill="#0f172a">宪法 · 宿主主权</text>
-    <text x="164" y="254" font-size="13.5" fill="#475569">11 条 + 六层附则；规则只认宿主原话或宿主明确同意，每改一次版本 +1、旧版留档</text>
+    <text x="164" y="254" font-size="13.5" fill="#475569">12 条（v1.5）+ 六层附则；规则只认宿主原话或宿主明确同意，每改一次版本 +1、旧版留档</text>
     <rect x="880" y="206" width="118" height="26" rx="13" fill="#f1f5f9" stroke="#cbd5e1"/>
     <text x="939" y="224" text-anchor="middle" font-size="11.5" fill="#334155">只有宿主能改</text>
 
@@ -199,6 +199,6 @@
   </g>
 
   <!-- 页脚 -->
-  <text x="64" y="1136" font-size="11.5" fill="#94a3b8">DSH 工作台 · 对外版总纲（已脱敏）· 2026-10-27 · 这张图对应仓库《总纲.md》，结构以最新版为准</text>
+  <text x="64" y="1136" font-size="11.5" fill="#94a3b8">DSH 工作台 · 对外版总纲（已脱敏）· v1.1 · 2026-10-28 · 这张图对应仓库《总纲.md》，结构以最新版为准</text>
   <text x="1536" y="1136" text-anchor="end" font-size="11.5" fill="#94a3b8">配图：总纲-全景.svg</text>
 </svg>
