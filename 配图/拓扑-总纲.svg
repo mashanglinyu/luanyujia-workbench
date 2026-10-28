@@ -1,381 +1,89 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1700" viewBox="0 0 2000 1700" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC','Segoe UI',sans-serif" role="img" aria-label="DSH 工作台拓扑总纲：宿主、宪法、共享层、场景、项目、运行时、归档与审计之间的连线关系">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#f8fafc"/>
-      <stop offset="1" stop-color="#eef2f8"/>
-    </linearGradient>
-    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
-      <path d="M28 0H0V28" fill="none" stroke="#e8eef7" stroke-width="1"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+<defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#eef2f7" stroke-width="1"/>
     </pattern>
-    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
-    </marker>
-    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/>
-    </marker>
-    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/>
-    </marker>
-    <marker id="at" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#0d9488"/>
-    </marker>
-    <marker id="as" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
-    </marker>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="arB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker>
+    <marker id="arP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7c3aed"/></marker>
+    <marker id="arG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+    <marker id="arS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#0284c7"/></marker>
+    <marker id="arA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#b45309"/></marker>
+    <style>
+      text { font-family: 'Microsoft YaHei','PingFang SC','Noto Sans SC',sans-serif; }
+      .t { font-weight: 700; fill: #0f172a; }
+      .b { fill: #475569; }
+      .m { fill: #94a3b8; }
+      .cap { font-weight: 600; }
+    </style>
   </defs>
-
-  <rect width="2000" height="1700" fill="url(#bg)"/>
-  <rect width="2000" height="1700" fill="url(#grid)" opacity="0.55"/>
-
-  <!-- 标题与图例 -->
-  <text x="70" y="64" font-size="30" font-weight="700" fill="#0f172a">DSH 工作台 · 拓扑总纲</text>
-  <text x="70" y="94" font-size="14" fill="#64748b">节点 = 东西放在哪一层；连线 = 谁读谁、谁写谁、谁兜底（C1~C10 见底部连线总表）</text>
-  <g font-size="12.5" fill="#475569">
-    <line x1="1480" y1="52" x2="1530" y2="52" stroke="#2563eb" stroke-width="2.4" marker-end="url(#ab)"/>
-    <text x="1538" y="56">主链路</text>
-    <line x1="1608" y1="52" x2="1658" y2="52" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ag)"/>
-    <text x="1666" y="56">写回 / 上行</text>
-    <line x1="1782" y1="52" x2="1832" y2="52" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ap)"/>
-    <text x="1840" y="56">承载</text>
-    <line x1="1480" y1="82" x2="1530" y2="82" stroke="#0d9488" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#at)"/>
-    <text x="1538" y="86">归档</text>
-    <line x1="1608" y1="82" x2="1658" y2="82" stroke="#64748b" stroke-width="2" stroke-dasharray="2 4" marker-end="url(#as)"/>
-    <text x="1666" y="86">只读巡检</text>
-  </g>
-
-  <!-- 宿主 -->
-  <rect x="760" y="120" width="400" height="54" rx="27" fill="#eef6ff" stroke="#2563eb" stroke-width="2"/>
-  <text x="960" y="143" text-anchor="middle" font-size="17" font-weight="700" fill="#1d4ed8">宿主（唯一决策人）</text>
-  <text x="960" y="162" text-anchor="middle" font-size="10.5" fill="#64748b">只认可：亲口说 / 明确同意</text>
-
-  <!-- C1 -->
-  <path d="M960,174 L960,210" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#ab)"/>
-  <g>
-    <circle cx="985" cy="192" r="12" fill="#2563eb"/>
-    <text x="985" y="196.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">C1</text>
-  </g>
-
-  <!-- 宪法 -->
-  <rect x="300" y="214" width="1320" height="136" rx="16" fill="#fffdf6" stroke="#b58110" stroke-width="2"/>
-  <text x="330" y="246" font-size="19" font-weight="700" fill="#0f172a">宪法 · 最高规则（版本化 · 只有宿主能改）</text>
-  <g font-size="12.5" fill="#334155">
-    <rect x="330" y="262" width="300" height="58" rx="10" fill="#ffffff" stroke="#e2d3a8"/>
-    <text x="348" y="285" font-size="13.5" font-weight="700" fill="#0f172a">宿主主权</text>
-    <text x="348" y="305" font-size="11" fill="#64748b">规则只认亲口 / 明确同意</text>
-
-    <rect x="650" y="262" width="300" height="58" rx="10" fill="#ffffff" stroke="#e2d3a8"/>
-    <text x="668" y="285" font-size="13.5" font-weight="700" fill="#0f172a">场景主权</text>
-    <text x="668" y="305" font-size="11" fill="#64748b">只写自己记忆，别人只提醒</text>
-
-    <rect x="970" y="262" width="300" height="58" rx="10" fill="#ffffff" stroke="#e2d3a8"/>
-    <text x="988" y="285" font-size="13.5" font-weight="700" fill="#0f172a">修改权分层</text>
-    <text x="988" y="305" font-size="11" fill="#64748b">宪法 / 台账 / 运行时 / 专属</text>
-
-    <rect x="1290" y="262" width="300" height="58" rx="10" fill="#ffffff" stroke="#e2d3a8"/>
-    <text x="1308" y="285" font-size="13.5" font-weight="700" fill="#0f172a">升级与回滚</text>
-    <text x="1308" y="305" font-size="11" fill="#64748b">工具在仓外 · 备份→验证→回滚</text>
-  </g>
-  <text x="330" y="338" font-size="11.5" fill="#7a6535">12 条（v1.5）+ 六层附则 · 改动 = 版本 +1、旧版留档</text>
-
-  <!-- C2 -->
-  <path d="M960,350 L960,386" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#ab)"/>
-  <g>
-    <circle cx="985" cy="368" r="12" fill="#2563eb"/>
-    <text x="985" y="372.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">C2</text>
-  </g>
-
-  <!-- 共享层 -->
-  <rect x="300" y="390" width="1320" height="160" rx="16" fill="#f8fbff" stroke="#2563eb" stroke-width="2"/>
-  <text x="330" y="422" font-size="19" font-weight="700" fill="#0f172a">共享层 · 所有人共用的事实</text>
-  <g font-size="12.5" fill="#334155">
-    <rect x="330" y="438" width="252" height="54" rx="10" fill="#ffffff" stroke="#bcd0ee"/>
-    <text x="348" y="461" font-size="13.5" font-weight="700" fill="#0f172a">场景区域表</text>
-    <text x="348" y="480" font-size="11" fill="#64748b">15 份 areas：范围 / 边界</text>
-
-    <rect x="594" y="438" width="252" height="54" rx="10" fill="#ffffff" stroke="#bcd0ee"/>
-    <text x="612" y="461" font-size="13.5" font-weight="700" fill="#0f172a">宿主画像</text>
-    <text x="612" y="480" font-size="11" fill="#64748b">偏好 / 风格 / 红线（唯一）</text>
-
-    <rect x="858" y="438" width="252" height="54" rx="10" fill="#ffffff" stroke="#bcd0ee"/>
-    <text x="876" y="461" font-size="13.5" font-weight="700" fill="#0f172a">项目清单</text>
-    <text x="876" y="480" font-size="11" fill="#64748b">项目清单 · memory 路由</text>
-
-    <rect x="1122" y="438" width="252" height="54" rx="10" fill="#ffffff" stroke="#bcd0ee"/>
-    <text x="1140" y="461" font-size="13.5" font-weight="700" fill="#0f172a">通知与待办</text>
-    <text x="1140" y="480" font-size="11" fill="#64748b">发生了什么 / 该做什么</text>
-
-    <rect x="1386" y="438" width="204" height="54" rx="10" fill="#ffffff" stroke="#bcd0ee"/>
-    <text x="1404" y="461" font-size="13.5" font-weight="700" fill="#0f172a">索引与台账</text>
-    <text x="1404" y="480" font-size="11" fill="#64748b">东西在哪</text>
-  </g>
-  <text x="330" y="522" font-size="11.5" fill="#3b5b86">分区写：各 owner 只写自己那份 · 共享层不代改事实 · 上行：areas / 冲突 / 画像参考</text>
-
-  <!-- C3 共享层 -> 场景（母线） -->
-  <path d="M960,550 L960,585" fill="none" stroke="#2563eb" stroke-width="2.2"/>
-  <path d="M500,585 L1420,585" fill="none" stroke="#2563eb" stroke-width="2.2"/>
-  <path d="M500,585 L500,606" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#ab)"/>
-  <path d="M960,585 L960,606" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#ab)"/>
-  <path d="M1420,585 L1420,606" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#ab)"/>
-  <g>
-    <circle cx="560" cy="585" r="12" fill="#2563eb"/>
-    <text x="560" y="589.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">C3</text>
-    <text x="582" y="574" font-size="11.5" fill="#2563eb">默认注入：全局须知 · 技能索引 · 开场读 §〇</text>
-  </g>
-
-  <!-- 场景 A -->
-  <rect x="300" y="610" width="400" height="220" rx="14" fill="#ffffff" stroke="#3f5270" stroke-width="1.8"/>
-  <text x="326" y="640" font-size="16" font-weight="700" fill="#0f172a">场景 A · 示例：内容助手</text>
-  <g font-size="12" fill="#334155">
-    <rect x="318" y="652" width="178" height="48" rx="9" fill="#f8fafc" stroke="#dbe3ee"/>
-    <text x="332" y="673" font-size="12.5" font-weight="700" fill="#0f172a">定位卡</text>
-    <text x="332" y="691" font-size="10" fill="#64748b">职责 / 资产 / 触发词</text>
-
-    <rect x="504" y="652" width="178" height="48" rx="9" fill="#e8f5ee" stroke="#a9d3bd"/>
-    <text x="518" y="673" font-size="12.5" font-weight="700" fill="#0f172a">场景私有记忆</text>
-    <text x="518" y="691" font-size="10" fill="#64748b">§〇 交接 ≤4 KB</text>
-
-    <rect x="318" y="708" width="178" height="48" rx="9" fill="#f8fafc" stroke="#dbe3ee"/>
-    <text x="332" y="729" font-size="12.5" font-weight="700" fill="#0f172a">身份卡 + 画像</text>
-    <text x="332" y="747" font-size="10" fill="#64748b">工具生成，别手改</text>
-
-    <rect x="504" y="708" width="178" height="48" rx="9" fill="#f8fafc" stroke="#dbe3ee"/>
-    <text x="518" y="729" font-size="12.5" font-weight="700" fill="#0f172a">专属技能</text>
-    <text x="518" y="747" font-size="10" fill="#64748b">可执行细则与坑位</text>
-  </g>
-  <rect x="318" y="766" width="364" height="30" rx="15" fill="#f1f5f9" stroke="#d7dfea"/>
-  <text x="500" y="786" text-anchor="middle" font-size="11" fill="#475569">核心职责 ≥3 条 · 会话 + §〇 交接（换会话闸门）</text>
-  <text x="326" y="816" font-size="10.5" fill="#8a94a6">读：开场 §〇 + 卡 + 技能 · 写：进度覆盖 §〇、决策追加 §五</text>
-
-  <!-- 场景 B -->
-  <rect x="760" y="610" width="400" height="220" rx="14" fill="#ffffff" stroke="#3f5270" stroke-width="1.8"/>
-  <text x="786" y="640" font-size="16" font-weight="700" fill="#0f172a">场景 B · 示例：素材设计</text>
-  <g font-size="12" fill="#334155">
-    <rect x="778" y="652" width="178" height="48" rx="9" fill="#f8fafc" stroke="#dbe3ee"/>
-    <text x="792" y="673" font-size="12.5" font-weight="700" fill="#0f172a">定位卡</text>
-    <text x="792" y="691" font-size="10" fill="#64748b">职责 / 资产 / 触发词</text>
-
-    <rect x="964" y="652" width="178" height="48" rx="9" fill="#e8f5ee" stroke="#a9d3bd"/>
-    <text x="978" y="673" font-size="12.5" font-weight="700" fill="#0f172a">场景私有记忆</text>
-    <text x="978" y="691" font-size="10" fill="#64748b">§〇 交接 ≤4 KB</text>
-
-    <rect x="778" y="708" width="178" height="48" rx="9" fill="#f8fafc" stroke="#dbe3ee"/>
-    <text x="792" y="729" font-size="12.5" font-weight="700" fill="#0f172a">身份卡 + 画像</text>
-    <text x="792" y="747" font-size="10" fill="#64748b">工具生成，别手改</text>
-
-    <rect x="964" y="708" width="178" height="48" rx="9" fill="#f8fafc" stroke="#dbe3ee"/>
-    <text x="978" y="729" font-size="12.5" font-weight="700" fill="#0f172a">专属技能</text>
-    <text x="978" y="747" font-size="10" fill="#64748b">可执行细则与坑位</text>
-  </g>
-  <rect x="778" y="766" width="364" height="30" rx="15" fill="#f1f5f9" stroke="#d7dfea"/>
-  <text x="960" y="786" text-anchor="middle" font-size="11" fill="#475569">核心职责 ≥3 条 · 会话 + §〇 交接（换会话闸门）</text>
-  <text x="786" y="816" font-size="10.5" fill="#8a94a6">读：开场 §〇 + 卡 + 技能 · 写：进度覆盖 §〇、决策追加 §五</text>
-
-  <!-- 场景 C -->
-  <rect x="1220" y="610" width="400" height="220" rx="14" fill="#fbfdff" stroke="#3f5270" stroke-width="1.8" stroke-dasharray="7 5"/>
-  <text x="1246" y="640" font-size="16" font-weight="700" fill="#0f172a">场景 C · 其余场景同构</text>
-  <g font-size="12" fill="#334155">
-    <rect x="1238" y="652" width="178" height="48" rx="9" fill="#f8fafc" stroke="#dbe3ee"/>
-    <text x="1252" y="673" font-size="12.5" font-weight="700" fill="#0f172a">定位卡</text>
-    <text x="1252" y="691" font-size="10" fill="#64748b">职责 / 资产 / 触发词</text>
-
-    <rect x="1424" y="652" width="178" height="48" rx="9" fill="#e8f5ee" stroke="#a9d3bd"/>
-    <text x="1438" y="673" font-size="12.5" font-weight="700" fill="#0f172a">场景私有记忆</text>
-    <text x="1438" y="691" font-size="10" fill="#64748b">§〇 交接 ≤4 KB</text>
-
-    <rect x="1238" y="708" width="178" height="48" rx="9" fill="#f8fafc" stroke="#dbe3ee"/>
-    <text x="1252" y="729" font-size="12.5" font-weight="700" fill="#0f172a">身份卡 + 画像</text>
-    <text x="1252" y="747" font-size="10" fill="#64748b">工具生成，别手改</text>
-
-    <rect x="1424" y="708" width="178" height="48" rx="9" fill="#f8fafc" stroke="#dbe3ee"/>
-    <text x="1438" y="729" font-size="12.5" font-weight="700" fill="#0f172a">专属技能</text>
-    <text x="1438" y="747" font-size="10" fill="#64748b">可执行细则与坑位</text>
-  </g>
-  <rect x="1238" y="766" width="364" height="30" rx="15" fill="#f1f5f9" stroke="#d7dfea"/>
-  <text x="1420" y="786" text-anchor="middle" font-size="11" fill="#475569">核心职责 ≥3 条 · 会话 + §〇 交接（换会话闸门）</text>
-  <text x="1246" y="816" font-size="10.5" fill="#8a94a6">场景·面板同构：一场景一记忆文件夹</text>
-
-  <!-- C4 场景 -> 共享层（上行，右走廊） -->
-  <path d="M1620,690 L1660,690 L1660,470 L1626,470" fill="none" stroke="#16a34a" stroke-width="1.9" stroke-dasharray="6 5" marker-end="url(#ag)"/>
-  <g transform="translate(1648,600) rotate(-90)">
-    <rect x="-98" y="-11" width="196" height="22" rx="11" fill="#f0fdf4" stroke="#bfe3cd"/>
-    <text x="0" y="4" text-anchor="middle" font-size="11" fill="#15803d">C4 上行：areas / 冲突 / 画像参考</text>
-  </g>
-
-  <!-- C7 场景 -> 归档（右侧） -->
-  <path d="M1620,790 L1686,790 L1686,930 L1696,930" fill="none" stroke="#0d9488" stroke-width="1.9" stroke-dasharray="6 5" marker-end="url(#at)"/>
-  <g>
-    <circle cx="1686" cy="836" r="12" fill="#0d9488"/>
-    <text x="1686" y="840.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">C7</text>
-  </g>
-
-  <!-- 运行时（右侧） -->
-  <rect x="1700" y="390" width="260" height="460" rx="14" fill="#faf7ff" stroke="#7c3aed" stroke-width="1.8"/>
-  <text x="1724" y="422" font-size="17" font-weight="700" fill="#0f172a">运行时（承载）</text>
-  <text x="1724" y="444" font-size="10.5" fill="#6b5b95">工具在代码仓外 · 不 patch</text>
-  <g font-size="12" fill="#334155">
-    <rect x="1718" y="458" width="224" height="44" rx="9" fill="#ffffff" stroke="#d9cdf0"/>
-    <text x="1736" y="485" font-size="13" font-weight="700" fill="#0f172a">引擎</text>
-
-    <rect x="1718" y="510" width="224" height="44" rx="9" fill="#ffffff" stroke="#d9cdf0"/>
-    <text x="1736" y="537" font-size="13" font-weight="700" fill="#0f172a">外壳 · 场景 JSON</text>
-
-    <rect x="1718" y="562" width="224" height="44" rx="9" fill="#ffffff" stroke="#d9cdf0"/>
-    <text x="1736" y="589" font-size="13" font-weight="700" fill="#0f172a">工具 · 数十个</text>
-
-    <rect x="1718" y="614" width="224" height="44" rx="9" fill="#ffffff" stroke="#d9cdf0"/>
-    <text x="1736" y="641" font-size="13" font-weight="700" fill="#0f172a">MCP · 按需接</text>
-
-    <rect x="1718" y="666" width="224" height="44" rx="9" fill="#ffffff" stroke="#d9cdf0"/>
-    <text x="1736" y="693" font-size="13" font-weight="700" fill="#0f172a">插件/技能 · 十余个</text>
-
-    <rect x="1718" y="718" width="224" height="44" rx="9" fill="#ffffff" stroke="#d9cdf0"/>
-    <text x="1736" y="745" font-size="13" font-weight="700" fill="#0f172a">计划任务</text>
-  </g>
-  <text x="1724" y="790" font-size="10.5" fill="#6b5b95">升级：备份 → 验证 → 可回滚</text>
-
-  <!-- C8 运行时 -> 场景 -->
-  <path d="M1700,770 L1626,770" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-dasharray="6 5" marker-end="url(#ap)"/>
-  <g>
-    <circle cx="1650" cy="770" r="12" fill="#7c3aed"/>
-    <text x="1650" y="774.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">C8</text>
-  </g>
-  <text x="1650" y="748" text-anchor="middle" font-size="10.5" fill="#7c3aed">承载</text>
-
-  <!-- 个人层（左侧，隔离） -->
-  <rect x="50" y="610" width="200" height="220" rx="14" fill="#fdf7ff" stroke="#7e3fa8" stroke-width="1.8" stroke-dasharray="7 5"/>
-  <text x="72" y="640" font-size="16" font-weight="700" fill="#5b2b7f">个人层（隔离）</text>
-  <g font-size="12" fill="#334155">
-    <rect x="68" y="652" width="164" height="42" rx="9" fill="#ffffff" stroke="#e2d0f0"/>
-    <text x="82" y="678" font-size="12.5" font-weight="700" fill="#0f172a">个人档案</text>
-    <rect x="68" y="700" width="164" height="42" rx="9" fill="#ffffff" stroke="#e2d0f0"/>
-    <text x="82" y="726" font-size="12.5" font-weight="700" fill="#0f172a">知识库</text>
-    <rect x="68" y="748" width="164" height="42" rx="9" fill="#ffffff" stroke="#e2d0f0"/>
-    <text x="82" y="774" font-size="12.5" font-weight="700" fill="#0f172a">隐私边界</text>
-  </g>
-  <text x="68" y="810" font-size="10.5" font-weight="700" fill="#7e3fa8">🔒 只有本人与授权者</text>
-  <text x="68" y="824" font-size="10" fill="#8a94a6">不进共享层 / 不进仓库</text>
-
-  <!-- C6 项目 -> 场景（左走廊） -->
-  <path d="M300,960 L270,960 L270,700 L296,700" fill="none" stroke="#16a34a" stroke-width="1.9" stroke-dasharray="6 5" marker-end="url(#ag)"/>
-  <g transform="translate(272,830) rotate(-90)">
-    <rect x="-92" y="-11" width="184" height="22" rx="11" fill="#f0fdf4" stroke="#bfe3cd"/>
-    <text x="0" y="4" text-anchor="middle" font-size="11" fill="#15803d">C6 成果 / 证据回写</text>
-  </g>
-
-  <!-- C5 场景 -> 项目（母线向下） -->
-  <path d="M500,830 L500,866" fill="none" stroke="#2563eb" stroke-width="1.9"/>
-  <path d="M960,830 L960,866" fill="none" stroke="#2563eb" stroke-width="1.9"/>
-  <path d="M1420,830 L1420,866" fill="none" stroke="#2563eb" stroke-width="1.9"/>
-  <path d="M500,866 L1420,866" fill="none" stroke="#2563eb" stroke-width="1.9"/>
-  <path d="M960,866 L960,896" fill="none" stroke="#2563eb" stroke-width="2.2" marker-end="url(#ab)"/>
-  <g>
-    <circle cx="588" cy="866" r="12" fill="#2563eb"/>
-    <text x="588" y="870.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">C5</text>
-    <text x="610" y="871" font-size="11.5" fill="#2563eb">项目记忆：一项目一份，比会话活得久</text>
-  </g>
-
-  <!-- 项目 -->
-  <rect x="300" y="900" width="1320" height="120" rx="16" fill="#fffaf3" stroke="#b58110" stroke-width="1.8"/>
-  <text x="330" y="932" font-size="18" font-weight="700" fill="#0f172a">项目（生命周期比会话长）</text>
-  <g font-size="12.5">
-    <rect x="330" y="946" width="200" height="42" rx="9" fill="#ffffff" stroke="#e8dcc0"/>
-    <text x="430" y="973" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">进行中</text>
-    <rect x="546" y="946" width="200" height="42" rx="9" fill="#ffffff" stroke="#e8dcc0"/>
-    <text x="646" y="973" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">等待外部</text>
-    <rect x="762" y="946" width="200" height="42" rx="9" fill="#ffffff" stroke="#e8dcc0"/>
-    <text x="862" y="973" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">已结项</text>
-    <rect x="978" y="946" width="200" height="42" rx="9" fill="#ffffff" stroke="#e8dcc0"/>
-    <text x="1078" y="973" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">归档</text>
-  </g>
-  <text x="1200" y="962" font-size="11.5" fill="#7a6535">一项目一份 项目记忆\&lt;项目id&gt;.md（≤8 KB）</text>
-  <text x="1200" y="982" font-size="11.5" fill="#7a6535">由项目清单的 memory 字段路由</text>
-
-  <!-- 归档 -->
-  <rect x="1700" y="880" width="260" height="100" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.8"/>
-  <text x="1724" y="912" font-size="17" font-weight="700" fill="#0f172a">归档（只进不改）</text>
-  <text x="1724" y="936" font-size="11.5" fill="#0f766e">备份 · 会话冷备 · 场景归档</text>
-  <text x="1724" y="956" font-size="11.5" fill="#0f766e">可恢复；不占入口，不影响读取</text>
-
-  <!-- 审计 -->
-  <rect x="300" y="1060" width="1320" height="64" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="1.6" stroke-dasharray="3 5"/>
-  <text x="330" y="1088" font-size="16" font-weight="700" fill="#0f172a">审计 · 只读巡检（不改数据）</text>
-  <text x="330" y="1108" font-size="11.5" fill="#475569">结构 / 记忆 / 索引 / 共享 / 技能 / 宪法 自检；报告只覆盖写，不参与业务</text>
-  <path d="M960,1020 L960,1056" fill="none" stroke="#64748b" stroke-width="1.8" stroke-dasharray="2 4" marker-end="url(#as)"/>
-  <g>
-    <circle cx="985" cy="1038" r="12" fill="#64748b"/>
-    <text x="985" y="1042.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">C9</text>
-  </g>
-
-  <!-- 连线总表 -->
-  <text x="70" y="1176" font-size="20" font-weight="700" fill="#0f172a">连线总表（每条线到底表示什么）</text>
-  <rect x="70" y="1192" width="1860" height="34" rx="8" fill="#eef3fa"/>
-  <text x="100" y="1214" font-size="12" font-weight="700" fill="#475569">编号</text>
-  <text x="150" y="1214" font-size="12" font-weight="700" fill="#475569">链路</text>
-  <text x="470" y="1214" font-size="12" font-weight="700" fill="#475569">含义</text>
-  <text x="1740" y="1214" font-size="12" font-weight="700" fill="#475569">线型</text>
-  <line x1="70" y1="1230" x2="1930" y2="1230" stroke="#edf1f7"/>
-  <circle cx="112" cy="1248" r="11" fill="#2563eb"/>
-  <text x="112" y="1252" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">C1</text>
-  <text x="150" y="1252" font-size="12.5" font-weight="700" fill="#0f172a">宿主 → 宪法</text>
-  <text x="470" y="1252" font-size="12.5" fill="#334155">规则与修订：只认宿主原话或明确同意；改一次版本 +1，旧版留档</text>
-  <text x="1740" y="1252" font-size="12.5" fill="#2563eb">实线 · 主链路</text>
-  <line x1="70" y1="1262" x2="1930" y2="1262" stroke="#edf1f7"/>
-  <circle cx="112" cy="1280" r="11" fill="#2563eb"/>
-  <text x="112" y="1284" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">C2</text>
-  <text x="150" y="1284" font-size="12.5" font-weight="700" fill="#0f172a">宪法 → 共享层</text>
-  <text x="470" y="1284" font-size="12.5" fill="#334155">默认遵守：12 条（v1.5）+ 六层附则约束共享层的结构与写法</text>
-  <text x="1740" y="1284" font-size="12.5" fill="#2563eb">实线 · 主链路</text>
-  <line x1="70" y1="1294" x2="1930" y2="1294" stroke="#edf1f7"/>
-  <circle cx="112" cy="1312" r="11" fill="#2563eb"/>
-  <text x="112" y="1316" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">C3</text>
-  <text x="150" y="1316" font-size="12.5" font-weight="700" fill="#0f172a">共享层 → 场景</text>
-  <text x="470" y="1316" font-size="12.5" fill="#334155">默认注入：全局须知 / 技能索引 / 画像；场景开场读 §〇 + §一 + §二</text>
-  <text x="1740" y="1316" font-size="12.5" fill="#2563eb">实线 · 主链路</text>
-  <line x1="70" y1="1326" x2="1930" y2="1326" stroke="#edf1f7"/>
-  <circle cx="112" cy="1344" r="11" fill="#16a34a"/>
-  <text x="112" y="1348" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">C4</text>
-  <text x="150" y="1348" font-size="12.5" font-weight="700" fill="#0f172a">场景 → 共享层</text>
-  <text x="470" y="1348" font-size="12.5" fill="#334155">上行：areas / 冲突 / 画像参考由场景自己写；共享层不代改事实</text>
-  <text x="1740" y="1348" font-size="12.5" fill="#15803d">虚线 · 写回/上行</text>
-  <line x1="70" y1="1358" x2="1930" y2="1358" stroke="#edf1f7"/>
-  <circle cx="112" cy="1376" r="11" fill="#2563eb"/>
-  <text x="112" y="1380" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">C5</text>
-  <text x="150" y="1380" font-size="12.5" font-weight="700" fill="#0f172a">场景 → 项目</text>
-  <text x="470" y="1380" font-size="12.5" fill="#334155">按项目记忆路由：一项目一份 项目记忆\&lt;项目id&gt;.md，与项目清单 memory 对应</text>
-  <text x="1740" y="1380" font-size="12.5" fill="#2563eb">实线 · 主链路</text>
-  <line x1="70" y1="1390" x2="1930" y2="1390" stroke="#edf1f7"/>
-  <circle cx="112" cy="1408" r="11" fill="#16a34a"/>
-  <text x="112" y="1412" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">C6</text>
-  <text x="150" y="1412" font-size="12.5" font-weight="700" fill="#0f172a">项目 → 场景</text>
-  <text x="470" y="1412" font-size="12.5" fill="#334155">成果/证据回写：验收或结项后落项目记忆与 §五，不写过程流水</text>
-  <text x="1740" y="1412" font-size="12.5" fill="#15803d">虚线 · 写回/上行</text>
-  <line x1="70" y1="1422" x2="1930" y2="1422" stroke="#edf1f7"/>
-  <circle cx="112" cy="1440" r="11" fill="#0d9488"/>
-  <text x="112" y="1444" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">C7</text>
-  <text x="150" y="1444" font-size="12.5" font-weight="700" fill="#0f172a">场景 → 归档</text>
-  <text x="470" y="1444" font-size="12.5" fill="#334155">交接归档：换会话前写 §〇，旧版进 归档\（只进不改，可恢复）</text>
-  <text x="1740" y="1444" font-size="12.5" fill="#0f766e">虚线 · 归档</text>
-  <line x1="70" y1="1454" x2="1930" y2="1454" stroke="#edf1f7"/>
-  <circle cx="112" cy="1472" r="11" fill="#7c3aed"/>
-  <text x="112" y="1476" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">C8</text>
-  <text x="150" y="1476" font-size="12.5" font-weight="700" fill="#0f172a">运行时 → 场景</text>
-  <text x="470" y="1476" font-size="12.5" fill="#334155">承载执行：引擎 / 工具 / MCP / 插件 / 任务；工具在仓外，升级不破坏数据</text>
-  <text x="1740" y="1476" font-size="12.5" fill="#6d28d9">虚线 · 承载</text>
-  <line x1="70" y1="1486" x2="1930" y2="1486" stroke="#edf1f7"/>
-  <circle cx="112" cy="1504" r="11" fill="#64748b"/>
-  <text x="112" y="1508" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">C9</text>
-  <text x="150" y="1508" font-size="12.5" font-weight="700" fill="#0f172a">审计 → 全层</text>
-  <text x="470" y="1508" font-size="12.5" fill="#334155">只读巡检：结构 / 记忆 / 索引 / 共享 / 技能 / 宪法；只出报告，不改数据</text>
-  <text x="1740" y="1508" font-size="12.5" fill="#475569">点线 · 只读</text>
-  <line x1="70" y1="1518" x2="1930" y2="1518" stroke="#edf1f7"/>
-  <circle cx="112" cy="1536" r="11" fill="#0ea5e9"/>
-  <text x="112" y="1540" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fff">C10</text>
-  <text x="150" y="1540" font-size="12.5" font-weight="700" fill="#0f172a">场景 ↔ 场景</text>
-  <text x="470" y="1540" font-size="12.5" fill="#334155">通知 / 派单 / 回执：一次派单 = 一条回执 = 结束；只请求，<tspan font-weight="700">不改对方记忆</tspan></text>
-  <text x="1740" y="1540" font-size="12.5" fill="#0284c7">虚线 · 请求</text>
-  <line x1="70" y1="1550" x2="1930" y2="1550" stroke="#edf1f7"/>
-
-  <rect x="70" y="1604" width="1860" height="30" rx="8" fill="#fdf7ff" stroke="#e2d0f0"/>
-  <text x="88" y="1624" font-size="12" fill="#7e3fa8">个人层（L3）不画连线 = 规则隔离：只有本人与授权者可读写，不进共享层、不进公开仓库；跨场景有用的结论只能进 areas。</text>
-  <text x="70" y="1674" font-size="11" fill="#94a3b8">DSH 工作台 · 对外版拓扑（已脱敏）· v1.1 · 2026-10-28 · 配套文字见 总纲.md</text>
+<rect width="1200" height="900" fill="#f8fafc"/>
+<rect width="1200" height="900" fill="url(#grid)"/>
+<text x="48" y="64" font-size="36" class="t">DSH 工作台 · 拓扑总纲</text>
+<text x="48" y="96" font-size="18" class="b">节点 = 东西放在哪一层；连线 = 谁读谁、谁写谁、谁兜底</text>
+<rect x="400" y="120" width="400" height="72" rx="14" fill="#1e293b" filter="url(#sh)"/>
+<text x="422" y="152" font-size="23" fill="#ffffff" font-weight="700">宿主</text>
+<text x="422" y="178" font-size="18" fill="#cbd5e1">唯一决策人 · 只认亲口说 / 明确同意</text>
+<rect x="56" y="120" width="296" height="72" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="56" y="120" width="6" height="72" rx="3" fill="#0284c7"/>
+<text x="78" y="154" font-size="22" class="t">命令台</text>
+<text x="78" y="186" font-size="18" class="b">只读 + 路由：分诊、派单、对账</text>
+<path d="M398 156 H354" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<path d="M600 192 V230" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arB)"/>
+<text x="614" y="216" font-size="17" class="cap" fill="#2563eb">C1</text>
+<rect x="400" y="232" width="400" height="108" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="400" y="232" width="6" height="108" rx="3" fill="#2563eb"/>
+<text x="422" y="266" font-size="22" class="t">L0 宪法 · 最高规则</text>
+<text x="422" y="298" font-size="18" class="b">版本化 · 只有宿主能改</text>
+<text x="422" y="327" font-size="18" class="b">改动 = 版本 +1，旧版留档</text>
+<path d="M600 340 V378" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arB)"/>
+<text x="614" y="364" font-size="17" class="cap" fill="#2563eb">C2</text>
+<rect x="400" y="380" width="400" height="108" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="400" y="380" width="6" height="108" rx="3" fill="#059669"/>
+<text x="422" y="414" font-size="22" class="t">L1 共享层 · 大家共用</text>
+<text x="422" y="446" font-size="18" class="b">宿主画像 · 区域表 · 项目清单</text>
+<text x="422" y="475" font-size="18" class="b">通知与待办 · 索引与台账</text>
+<path d="M600 488 V526" stroke="#059669" stroke-width="2.5" marker-end="url(#arG)"/>
+<text x="614" y="512" font-size="17" class="cap" fill="#059669">C3</text>
+<rect x="400" y="528" width="400" height="142" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="400" y="528" width="6" height="142" rx="3" fill="#7c3aed"/>
+<text x="422" y="562" font-size="22" class="t">L2 场景私有 · 谁写谁的</text>
+<text x="422" y="592" font-size="18" class="b">定位卡 · 私有记忆 · 身份卡 · 技能</text>
+<rect x="418" y="608" width="364" height="46" rx="10" fill="#f5f3ff" stroke="#ddd6fe"/>
+<text x="436" y="636" font-size="17" class="cap" fill="#5b21b6">项目记忆 · 一项目一份，比会话活得久</text>
+<rect x="848" y="528" width="296" height="142" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="848" y="528" width="6" height="142" rx="3" fill="#64748b"/>
+<text x="870" y="562" font-size="22" class="t">L5 归档 · 只进不改</text>
+<text x="870" y="594" font-size="18" class="b">备份 · 冷备 · 场景归档</text>
+<text x="870" y="623" font-size="18" class="b">可恢复，不占入口</text>
+<path d="M802 599.0 H846" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+<rect x="56" y="528" width="296" height="142" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="56" y="528" width="6" height="142" rx="3" fill="#64748b"/>
+<text x="78" y="562" font-size="22" class="t">L4 运行时</text>
+<text x="78" y="594" font-size="18" class="b">引擎 · 外壳 · 工具 · MCP</text>
+<text x="78" y="623" font-size="18" class="b">插件 · 计划任务</text>
+<path d="M354 599.0 H398" stroke="#64748b" stroke-width="2.5" marker-end="url(#ar)"/>
+<text x="376" y="585.0" font-size="17" class="cap" fill="#64748b" text-anchor="middle">C8</text>
+<rect x="848" y="700" width="296" height="72" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-dasharray="6 5"/>
+<text x="870" y="732" font-size="20" class="t">🔒 L3 个人层 · 隔离</text>
+<text x="870" y="758" font-size="16" class="m">只有本人与授权者 · 刻意不画线</text>
+<rect x="56" y="700" width="744" height="80" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-dasharray="6 5"/>
+<text x="78" y="734" font-size="21" class="t">审计 · 只读巡检（C9）</text>
+<text x="78" y="762" font-size="17" class="b">结构 / 记忆 / 索引 / 共享 / 技能 / 宪法 自检 · 只出报告，不改数据</text>
+<path d="M600 670 V698" stroke="#94a3b8" stroke-width="2" stroke-dasharray="3 5" marker-end="url(#ar)"/>
+<text x="614" y="690" font-size="17" class="cap" fill="#64748b">C9 只读</text>
+<text x="56" y="826" font-size="17" class="cap" fill="#2563eb">主轴 C1 → C2 → C3</text>
+<text x="248" y="826" font-size="17" class="cap" fill="#64748b">承载 C8</text>
+<text x="352" y="826" font-size="17" class="cap" fill="#64748b">巡检 C9</text>
+<text x="1144" y="826" font-size="16" class="m" text-anchor="end">判据：每样东西只属于一层，只在一个地方是真源</text>
+<text x="56" y="862" font-size="16" class="m">个人层（L3）刻意不画线 = 隔离本身是规矩：不进共享层、不进公开仓库。</text>
 </svg>

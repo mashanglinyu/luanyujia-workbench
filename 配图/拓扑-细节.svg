@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1100" viewBox="0 0 1200 1100">
+<defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#eef2f7" stroke-width="1"/>
+    </pattern>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/></marker>
+    <marker id="arB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker>
+    <marker id="arP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7c3aed"/></marker>
+    <marker id="arG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#059669"/></marker>
+    <marker id="arS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#0284c7"/></marker>
+    <marker id="arA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#b45309"/></marker>
+    <style>
+      text { font-family: 'Microsoft YaHei','PingFang SC','Noto Sans SC',sans-serif; }
+      .t { font-weight: 700; fill: #0f172a; }
+      .b { fill: #475569; }
+      .m { fill: #94a3b8; }
+      .cap { font-weight: 600; }
+    </style>
+  </defs>
+<rect width="1200" height="1100" fill="#f8fafc"/>
+<rect width="1200" height="1100" fill="url(#grid)"/>
+<text x="48" y="60" font-size="32" class="t">DSH 工作台 · 拓扑细节</text>
+<text x="48" y="94" font-size="18" class="b">C4 / C5 / C6 / C7 / C10 五条边的确切含义，以及审计与归档的边界</text>
+<rect x="400" y="124" width="700" height="100" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="400" y="124" width="6" height="100" rx="3" fill="#059669"/>
+<text x="422" y="158" font-size="22" class="t">L1 共享层 · 谁都能读，分区写</text>
+<text x="422" y="190" font-size="17" class="b">宿主画像 · 区域表 · 项目清单 · 索引台账</text>
+<rect x="400" y="400" width="300" height="130" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="400" y="400" width="6" height="130" rx="3" fill="#7c3aed"/>
+<text x="422" y="436" font-size="21" class="t">场景 A</text>
+<text x="422" y="466" font-size="17" class="b">本场景记忆 · 只有自己能写</text>
+<text x="422" y="496" font-size="16" class="m">§〇 交接 · 专属技能 · 归档/</text>
+<rect x="800" y="400" width="300" height="130" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="800" y="400" width="6" height="130" rx="3" fill="#7c3aed"/>
+<text x="822" y="436" font-size="21" class="t">场景 B</text>
+<text x="822" y="466" font-size="17" class="b">同样一套结构</text>
+<text x="822" y="496" font-size="16" class="m">互不代写、只提醒</text>
+<path d="M470 400 V232" stroke="#059669" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arG)"/>
+<text x="482" y="300" font-size="17" class="cap" fill="#059669">C4 上行</text>
+<text x="482" y="326" font-size="16" class="m">areas / 冲突 / 画像参考</text>
+<path d="M702 462 H798" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arP)" marker-start="url(#arP)"/>
+<text x="750" y="446" font-size="17" class="cap" fill="#7c3aed" text-anchor="middle">C10</text>
+<text x="750" y="492" font-size="16" class="m" text-anchor="middle">只请求</text>
+<text x="750" y="514" font-size="16" class="m" text-anchor="middle">不改记忆</text>
+<rect x="56" y="400" width="290" height="130" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="56" y="400" width="6" height="130" rx="3" fill="#0284c7"/>
+<text x="78" y="434" font-size="21" class="t">项目</text>
+<text x="78" y="466" font-size="16" class="b">一项目一份 项目记忆</text>
+<text x="78" y="495" font-size="16" class="b">由项目清单的 memory 路由</text>
+<path d="M398 438 H350" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arS)"/>
+<text x="374" y="426" font-size="16" class="cap" fill="#0284c7" text-anchor="middle">C5</text>
+<path d="M348 490 H396" stroke="#0284c7" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arS)"/>
+<text x="374" y="512" font-size="16" class="cap" fill="#0284c7" text-anchor="middle">C6</text>
+<text x="374" y="548" font-size="16" class="m" text-anchor="middle">成果 / 证据回写</text>
+<rect x="400" y="700" width="300" height="118" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="400" y="700" width="6" height="118" rx="3" fill="#64748b"/>
+<text x="422" y="734" font-size="21" class="t">L5 归档 · 只进不改</text>
+<text x="422" y="766" font-size="16" class="b">备份 · 冷备 · 场景归档</text>
+<text x="422" y="795" font-size="16" class="b">可恢复，不占入口</text>
+<path d="M550 532 V698" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#ar)"/>
+<text x="562" y="610" font-size="17" class="cap" fill="#64748b">C7 交接归档</text>
+<text x="562" y="636" font-size="16" class="m">只进不改，可恢复</text>
+<rect x="800" y="700" width="300" height="118" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<rect x="800" y="700" width="6" height="118" rx="3" fill="#b45309"/>
+<text x="822" y="734" font-size="21" class="t">审计 · 只读巡检</text>
+<text x="822" y="766" font-size="16" class="b">结构/记忆/索引/共享/技能/宪法</text>
+<text x="822" y="795" font-size="16" class="b">只出报告，不改任何数据</text>
+<path d="M1100 759 H1136 V174 H1104" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="2 6" marker-end="url(#arA)"/>
+<text x="1152" y="470" font-size="15" class="cap" fill="#b45309" text-anchor="middle" letter-spacing="1" transform="rotate(90 1152 470)">C9 只读巡检</text>
+<path d="M798 759 H704" stroke="#b45309" stroke-width="2" stroke-dasharray="2 6" marker-end="url(#arA)"/>
+<rect x="56" y="880" width="1088" height="170" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+<text x="80" y="918" font-size="20" class="t">口径说明</text>
+<circle cx="84" cy="956" r="4" fill="#2563eb"/>
+<text x="100" y="962" font-size="17" class="cap" fill="#0f172a">只请求，不改对方记忆</text>
+<text x="284" y="962" font-size="16" class="b">— C10 · 改谁的记忆只归谁</text>
+<circle cx="624" cy="956" r="4" fill="#2563eb"/>
+<text x="640" y="962" font-size="17" class="cap" fill="#0f172a">审计只读，只出报告</text>
+<text x="807" y="962" font-size="16" class="b">— C9 · 不参与业务数据</text>
+<circle cx="84" cy="1000" r="4" fill="#2563eb"/>
+<text x="100" y="1006" font-size="17" class="cap" fill="#0f172a">归档只进不改</text>
+<text x="216" y="1006" font-size="16" class="b">— C7 · 可回滚，不改写历史</text>
+<circle cx="624" cy="1000" r="4" fill="#2563eb"/>
+<text x="640" y="1006" font-size="17" class="cap" fill="#0f172a">规模随版本</text>
+<text x="739" y="1006" font-size="16" class="b">— 数量只描述当下，不写死</text>
+</svg>
