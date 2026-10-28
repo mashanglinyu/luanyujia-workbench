@@ -220,7 +220,7 @@
 
 | | |
 |---|---|
-| 个人站 | <https://luanyujia.pages.dev> |
+| 个人站 | <https://linyujia.me> |
 | GitHub | 本仓库 |
 | 同作者的另一套东西 | 个人站首页「小工具」区（含本仓库的入口卡片） |
 
@@ -237,9 +237,9 @@
 ---
 
 <p align="center">
-  <sub>作者 <b>淋雨家</b> · 个人站 → <a href="https://luanyujia.pages.dev">luanyujia.pages.dev</a></sub>
+  <sub>作者 <b>淋雨家</b> · 个人站 → <a href="https://linyujia.me">linyujia.me</a></sub>
 </p>
 
 ---
 
-> 📅 **最后更新**：2026-10-24（新增 `程序开发` 场景配置、`.gitignore` 公开边界、`更新清单.md`；规则同步 10-22 临时目录新口径）
+> 📅 **最后更新**：2026-10-28（`12-源码照搬` 换成**公开版工作台**：四场景 + 完整外壳，剔除 OA/行情/更新等业务实现；README 加「小白 5 分钟」路径与**神经元配图**；拓扑图拆成 主图 / 细节图 / 完整版 三张；品牌恢复为「淋雨家的工作台」）
