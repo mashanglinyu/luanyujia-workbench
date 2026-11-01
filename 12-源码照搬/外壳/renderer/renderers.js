@@ -14449,6 +14449,24 @@ renderers.harness = (body, meta, head) => {
       //   而且只在**本分区本面板**里，不会再被对侧清零）。用完就退回 ① 点侧栏会话行，不会无休止重载。
       //   ⚠ 判"到没到位"仍然只看本面板画面（titlePinned）—— 那是唯一可信的本面板状态；
       //     这里读键只用于判断"要不要写"，不用于判断"成没成"。
+      // 2026-11-01 宿主反馈「每 3 秒自动刷新」⇒ 这里不再自动整页 reload：
+      //   只给「未钉上」提示条，用户点它才刷新（手动 ⟳），避免面板自己不停重刷。
+      const showPinNeedRefresh = () => {
+        try {
+          let tip = body.querySelector('.pin-need-refresh');
+          if (!tip) {
+            tip = document.createElement('div');
+            tip.className = 'pin-need-refresh';
+            tip.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:9999;max-width:420px;padding:10px 14px;' +
+              'border:1px solid rgba(251,191,36,.65);background:rgba(32,24,8,.96);color:#fde68a;border-radius:10px;' +
+              'font:13px/1.55 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.45);cursor:pointer';
+            tip.textContent = '⚠ 会话还没钉上（目标已写入，需刷新一次生效）· 点这里手动刷新';
+            tip.title = '不会再自动刷新；点一下才刷新';
+            tip.addEventListener('click', () => { try { location.reload(); } catch (e) { } });
+            body.appendChild(tip);
+          }
+        } catch (e) { /* ignore */ }
+      };
       if (SESSION_ID) {
         const curSel = (() => { try { const s = readSel(); return (s && s.sessionId) ? String(s.sessionId) : ''; } catch (e) { return ''; } })();
         if (curSel !== String(SESSION_ID) && readReloads() < RELOAD_MAX && (Date.now() - readReloadAt()) > reloadGap()) {
@@ -14456,7 +14474,7 @@ renderers.harness = (body, meta, head) => {
           markReloadAt();
           if (writeSel(SESSION_ID)) {
             refreshDiag(null);
-            try { location.reload(); } catch (e) { }
+            showPinNeedRefresh();
             return;                                  // reload 后脚本会重跑：那时键已是目标，应用直接进会话
           }
         }

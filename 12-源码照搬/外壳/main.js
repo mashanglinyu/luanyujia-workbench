@@ -600,8 +600,9 @@ function startSiteServer() {
         res.end('<!doctype html><meta charset="utf-8"><title>等待引擎…</title>' +
           '<body style="background:#0b0d12;color:#e6e8ee;font:14px/1.8 system-ui;padding:40px">' +
           '<h2>引擎还没就绪</h2><p>工作台正在启动 Harness 引擎（或还没拿到本次启动令牌）。</p>' +
-          '<p>本页每 3 秒自动重试，也可以稍后手动刷新。</p>' +
-          '<script>setTimeout(function(){location.reload()},3000)<\/script></body>');
+          '<p>这个页面<b>不再自动刷新</b>；看到引擎起来后，点下面按钮重新检查。</p>' +
+          '<p><a href="" style="display:inline-block;padding:9px 18px;border:1px solid #3b82f6;border-radius:8px;color:#93c5fd;text-decoration:none">🔄 重新检查</a></p>' +
+          '<p style="color:#64748b;font-size:12px">2026-11-01 起改为手动重试</p></body>');
       }
       return;
     }
