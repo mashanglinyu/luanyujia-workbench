@@ -40,10 +40,14 @@
       if (bootOver() || waited > 8000) { clearInterval(wait); tick(); }
     }, 500);
     // 启动完成后如果又被引擎页抢走，再拉一次
-    setInterval(function () {
+    // 2026-11-01 宿主反馈：每 3 秒自动刷新太频繁 ⇒ 改为「10 秒一次、只在前台可见时、最多 30 次」
+    var recoverTries = 0;
+    var recover = setInterval(function () {
+      if (document.visibilityState && document.visibilityState !== 'visible') return;  // 后台不刷新
       var a = activeId();
       if (!a || a === 'harness') pick();
-    }, 3000);
+      if (++recoverTries >= 30) clearInterval(recover);                                 // 5 分钟内没救回来就停，不再空转
+    }, 10000);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
