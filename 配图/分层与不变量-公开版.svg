@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="900" viewBox="0 0 1240 900" font-family="'Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1420"/><stop offset="1" stop-color="#070b14"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#06e7e9"/><stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="#1b2a3d" stroke-width="1"/>
+    </pattern>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#22d3ee"/>
+    </marker>
+  </defs>
+
+  <rect width="1240" height="900" fill="url(#bg)"/>
+  <rect width="1240" height="900" fill="url(#grid)" opacity="0.35"/>
+
+  <!-- 标题 -->
+  <text x="60" y="64" fill="#22d3ee" font-size="13" letter-spacing="4">LAYERED ARCHITECTURE · PUBLIC VIEW</text>
+  <text x="60" y="108" fill="#f8fafc" font-size="34" font-weight="800">淋雨家的工作台 · 分层与不变量</text>
+  <text x="60" y="140" fill="#94a3b8" font-size="14">公开的是「分层、接口、不变量」；不公开的是「实现、参数、脚本、台账结构」。</text>
+
+  <!-- L4 协作层 -->
+  <g>
+    <rect x="60" y="176" width="700" height="96" rx="12" fill="#101a2c" stroke="#22c55e" stroke-opacity="0.55"/>
+    <rect x="60" y="176" width="6" height="96" rx="3" fill="#22c55e"/>
+    <text x="86" y="208" fill="#22c55e" font-size="12" letter-spacing="2">L4 · 协作层</text>
+    <text x="86" y="236" fill="#e2e8f0" font-size="17" font-weight="700">派单 · 回执 · 台账</text>
+    <text x="86" y="258" fill="#8fa3ba" font-size="12.5">不变量：同一件事只有一条记录；发出即进入「待回执」；销账必须有证据。</text>
+  </g>
+
+  <!-- L3 记忆层 -->
+  <g>
+    <rect x="60" y="292" width="700" height="96" rx="12" fill="#141c2f" stroke="#8b5cf6" stroke-opacity="0.55"/>
+    <rect x="60" y="292" width="6" height="96" rx="3" fill="#8b5cf6"/>
+    <text x="86" y="324" fill="#a78bfa" font-size="12" letter-spacing="2">L3 · 记忆层</text>
+    <text x="86" y="352" fill="#e2e8f0" font-size="17" font-weight="700">宿主画像 · 场景记忆 · 项目记忆</text>
+    <text x="86" y="374" fill="#8fa3ba" font-size="12.5">不变量：记忆落文件，不落会话；覆盖写 + 旧版归档；画像与事实分开存。</text>
+  </g>
+
+  <!-- L2 场景层 -->
+  <g>
+    <rect x="60" y="408" width="700" height="96" rx="12" fill="#101a2c" stroke="#38bdf8" stroke-opacity="0.55"/>
+    <rect x="60" y="408" width="6" height="96" rx="3" fill="#38bdf8"/>
+    <text x="86" y="440" fill="#38bdf8" font-size="12" letter-spacing="2">L2 · 场景层</text>
+    <text x="86" y="468" fill="#e2e8f0" font-size="17" font-weight="700">一个场景 = 一个工人</text>
+    <text x="86" y="490" fill="#8fa3ba" font-size="12.5">不变量：职责单一、能整类接活、可单独验收/替换；工人越用越强。</text>
+  </g>
+
+  <!-- L1 执行层 -->
+  <g>
+    <rect x="60" y="524" width="700" height="96" rx="12" fill="#141c2f" stroke="#06e7e9" stroke-opacity="0.6"/>
+    <rect x="60" y="524" width="6" height="96" rx="3" fill="#06e7e9"/>
+    <text x="86" y="556" fill="#06e7e9" font-size="12" letter-spacing="2">L1 · 执行层</text>
+    <text x="86" y="584" fill="#e2e8f0" font-size="17" font-weight="700">控件级操作 · 浏览器 · 终端 · 文件</text>
+    <text x="86" y="606" fill="#8fa3ba" font-size="12.5">不变量：操作后必须读回自证；改动可撤回；权限分档，越权即拒。</text>
+  </g>
+
+  <!-- L0 平台层 -->
+  <g>
+    <rect x="60" y="640" width="700" height="96" rx="12" fill="#0e1626" stroke="#64748b" stroke-opacity="0.7" stroke-dasharray="6 6"/>
+    <rect x="60" y="640" width="6" height="96" rx="3" fill="#64748b"/>
+    <text x="86" y="672" fill="#94a3b8" font-size="12" letter-spacing="2">L0 · 平台层（可替换）</text>
+    <text x="86" y="700" fill="#cbd5e1" font-size="17" font-weight="700">模型网关 · 会话绑定 · 工具注册</text>
+    <text x="86" y="722" fill="#7c8ba1" font-size="12.5">这一层随时可换（换模型/换运行时），上面四层的不变量不变。</text>
+  </g>
+
+  <!-- 右侧图例 -->
+  <g>
+    <rect x="800" y="176" width="380" height="270" rx="14" fill="#0b1422" stroke="#22d3ee" stroke-opacity="0.35"/>
+    <text x="826" y="210" fill="#22d3ee" font-size="12" letter-spacing="2">公开 / 不公开</text>
+
+    <text x="826" y="244" fill="#22c55e" font-size="13" font-weight="700">公开</text>
+    <text x="826" y="268" fill="#b6c4d6" font-size="12.5">· 分层与职责边界</text>
+    <text x="826" y="290" fill="#b6c4d6" font-size="12.5">· 不变量（为什么这样设计）</text>
+    <text x="826" y="312" fill="#b6c4d6" font-size="12.5">· 接口形状（输入/输出语义）</text>
+    <text x="826" y="334" fill="#b6c4d6" font-size="12.5">· 选型方法与验证入口</text>
+
+    <text x="826" y="372" fill="#f59e0b" font-size="13" font-weight="700">不公开（护城河）</text>
+    <text x="826" y="396" fill="#b6c4d6" font-size="12.5">· 具体实现与调参</text>
+    <text x="826" y="418" fill="#b6c4d6" font-size="12.5">· 台账/日志结构</text>
+
+    <rect x="800" y="470" width="380" height="266" rx="14" fill="#0b1422" stroke="#8b5cf6" stroke-opacity="0.35"/>
+    <text x="826" y="504" fill="#c4b5fd" font-size="12" letter-spacing="2">三条不变量</text>
+    <text x="826" y="542" fill="#e2e8f0" font-size="14" font-weight="700">① 记忆落文件</text>
+    <text x="826" y="564" fill="#8fa3ba" font-size="12">换会话不失忆；旧版可回滚。</text>
+    <text x="826" y="600" fill="#e2e8f0" font-size="14" font-weight="700">② 操作可验证</text>
+    <text x="826" y="622" fill="#8fa3ba" font-size="12">做完必须读回，不一致就报错。</text>
+    <text x="826" y="658" fill="#e2e8f0" font-size="14" font-weight="700">③ 改动可回滚</text>
+    <text x="826" y="680" fill="#8fa3ba" font-size="12">一次操作一条可撤回记录。</text>
+  </g>
+
+  <!-- 右侧箭头说明 -->
+  <g stroke="#22d3ee" stroke-width="1.4" fill="none" opacity="0.7">
+    <path d="M770 224 L798 224" marker-end="url(#arr)"/>
+    <path d="M770 340 L798 340" marker-end="url(#arr)"/>
+  </g>
+
+  <text x="60" y="866" fill="#64748b" font-size="12">本图只描述分层与不变量，不含任何实现细节 · 淋雨家的工作台 · 2026-11</text>
+</svg>
