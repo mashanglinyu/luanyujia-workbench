@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="780" viewBox="0 0 1240 780" font-family="'Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a1420"/><stop offset="1" stop-color="#070b14"/></linearGradient>
+    <pattern id="grid2" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#1b2a3d" stroke-width="1"/></pattern>
+    <marker id="arr2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#22d3ee"/></marker>
+  </defs>
+  <rect width="1240" height="780" fill="url(#bg2)"/>
+  <rect width="1240" height="780" fill="url(#grid2)" opacity="0.32"/>
+
+  <text x="60" y="58" fill="#22d3ee" font-size="12" letter-spacing="4">SUPER-AGENT · ABSTRACT TOPOLOGY</text>
+  <text x="60" y="100" fill="#f8fafc" font-size="32" font-weight="800">决策 — 执行 — 验收 — 档案</text>
+  <text x="60" y="130" fill="#94a3b8" font-size="13.5">单向依赖：执行不替决策判断，验收不替执行补动作，档案只记录不改结论。</text>
+
+  <!-- 决策层 -->
+  <g>
+    <rect x="60" y="168" width="640" height="92" rx="12" fill="#141c2f" stroke="#8b5cf6" stroke-opacity="0.6"/>
+    <rect x="60" y="168" width="6" height="92" rx="3" fill="#8b5cf6"/>
+    <text x="86" y="198" fill="#c4b5fd" font-size="11.5" letter-spacing="2">① 决策层</text>
+    <text x="86" y="226" fill="#e2e8f0" font-size="16.5" font-weight="700">Router / Worker · Policy / Mandate</text>
+    <text x="86" y="248" fill="#8fa3ba" font-size="12">谁来做、做什么、这次允许做到哪（授权不是永久的）</text>
+  </g>
+  <path d="M380 262 L380 286" stroke="#22d3ee" stroke-width="1.4" marker-end="url(#arr2)" opacity="0.75"/>
+
+  <!-- 执行层 -->
+  <g>
+    <rect x="60" y="288" width="640" height="92" rx="12" fill="#101a2c" stroke="#06e7e9" stroke-opacity="0.6"/>
+    <rect x="60" y="288" width="6" height="92" rx="3" fill="#06e7e9"/>
+    <text x="86" y="318" fill="#67e8f9" font-size="11.5" letter-spacing="2">② 执行层</text>
+    <text x="86" y="346" fill="#e2e8f0" font-size="16.5" font-weight="700">工具 · 桌面 · 浏览器 · 文件</text>
+    <text x="86" y="368" fill="#8fa3ba" font-size="12">真的动手；大结果溢出到文件（Inline &amp; Spill），留指针</text>
+  </g>
+  <path d="M380 382 L380 406" stroke="#22d3ee" stroke-width="1.4" marker-end="url(#arr2)" opacity="0.75"/>
+
+  <!-- 验收层 -->
+  <g>
+    <rect x="60" y="408" width="640" height="92" rx="12" fill="#141c2f" stroke="#22c55e" stroke-opacity="0.6"/>
+    <rect x="60" y="408" width="6" height="92" rx="3" fill="#22c55e"/>
+    <text x="86" y="438" fill="#86efac" font-size="11.5" letter-spacing="2">③ 验收层</text>
+    <text x="86" y="466" fill="#e2e8f0" font-size="16.5" font-weight="700">读回 · 对证据 · 判通过</text>
+    <text x="86" y="488" fill="#8fa3ba" font-size="12">证据 &gt; 声明；说"做完"不算，要给可复核的东西</text>
+  </g>
+  <path d="M380 502 L380 526" stroke="#22d3ee" stroke-width="1.4" marker-end="url(#arr2)" opacity="0.75"/>
+
+  <!-- 档案层 -->
+  <g>
+    <rect x="60" y="528" width="640" height="92" rx="12" fill="#101a2c" stroke="#f59e0b" stroke-opacity="0.6"/>
+    <rect x="60" y="528" width="6" height="92" rx="3" fill="#f59e0b"/>
+    <text x="86" y="558" fill="#fcd34d" font-size="11.5" letter-spacing="2">④ 档案层</text>
+    <text x="86" y="586" fill="#e2e8f0" font-size="16.5" font-weight="700">一单一档：过程 · 证据 · 结论 · 可回滚点</text>
+    <text x="86" y="608" fill="#8fa3ba" font-size="12">只能追加与归档，不能回头改前四层的结论</text>
+  </g>
+
+  <!-- 右侧：三条不变量 -->
+  <g>
+    <rect x="740" y="168" width="440" height="300" rx="14" fill="#0b1422" stroke="#22d3ee" stroke-opacity="0.35"/>
+    <text x="766" y="202" fill="#22d3ee" font-size="11.5" letter-spacing="2">三条不变量</text>
+
+    <text x="766" y="238" fill="#e2e8f0" font-size="15" font-weight="700">① 一单一 owner</text>
+    <text x="766" y="260" fill="#8fa3ba" font-size="12">同一时刻只有一个负责人；换人显式交接。</text>
+
+    <text x="766" y="300" fill="#e2e8f0" font-size="15" font-weight="700">② 证据 &gt; 声明</text>
+    <text x="766" y="322" fill="#8fa3ba" font-size="12">读回、日志、文件、URL —— 至少一样可复核。</text>
+
+    <text x="766" y="362" fill="#e2e8f0" font-size="15" font-weight="700">③ 人只批解释 / 承诺类</text>
+    <text x="766" y="384" fill="#8fa3ba" font-size="12">机械动作不逐条找人点头；承诺与解释必须人批。</text>
+
+    <text x="766" y="424" fill="#64748b" font-size="11.5">工具可以换，这三条不变量不能丢。</text>
+  </g>
+
+  <!-- 右侧：公开/不公开 -->
+  <g>
+    <rect x="740" y="492" width="440" height="128" rx="14" fill="#0b1422" stroke="#8b5cf6" stroke-opacity="0.35"/>
+    <text x="766" y="524" fill="#c4b5fd" font-size="11.5" letter-spacing="2">公开 / 不公开</text>
+    <text x="766" y="552" fill="#b6c4d6" font-size="12">公开：概念、分层、不变量、公开仓库链接</text>
+    <text x="766" y="576" fill="#b6c4d6" font-size="12">不公开：实现、schema、脚本、阈值、回滚参数</text>
+    <text x="766" y="600" fill="#b6c4d6" font-size="12">不写：客户信息、私有路径、密钥、场景记忆</text>
+  </g>
+
+  <text x="60" y="742" fill="#64748b" font-size="12">本图只描述抽象分层与不变量，不含实现 · 淋雨家的工作台 · 2026-11</text>
+</svg>
