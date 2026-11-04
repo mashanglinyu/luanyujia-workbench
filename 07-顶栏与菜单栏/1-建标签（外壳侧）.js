@@ -1,3 +1,4 @@
+/* 节选说明：这份文件是外壳侧建标签逻辑的摘录（不能直接运行）。*/const SNIPPET = String.raw`
 // 1-建标签（外壳侧）.js —— 摘自 工作台外壳 renderer.js（顶栏「场景标签栏」的 DOM 构建 + 钉会话）
 // ⚠ 外壳侧代码改完**必须重启 GUI**（不像 renderers.js 能热加载）。摘录片段，离上下文不能单独运行，看结构用。
   // 「⧉ 在新窗口打开」：标签右侧的小按钮（场景分离 → 一屏一个场景）
@@ -7,7 +8,7 @@
     b.addEventListener('click', (ev) => {
       ev.stopPropagation();   // 别顺带切换标签
       ev.preventDefault();
-      try { window.app.win.openScene(id); } catch (e) { /* ignore */ }
+      try { window.app.win.openScene(id); } catch (e) { /* ignore *\/ }
     });
     tab.appendChild(b);
   };
@@ -88,14 +89,14 @@
       showView('scenario');
       // 已在独立窗口里跑 → 顺手把那个窗口拉到前台（本窗口显示占位卡，不重复渲染一份）
       if (detachedScenes.has(s.id) && forceLocalScene !== s.id) {
-        try { window.app.win.openScene(s.id); } catch (e) { /* ignore */ }
+        try { window.app.win.openScene(s.id); } catch (e) { /* ignore *\/ }
       }
       loadScenario(s.id);
     });
     // 右键标签 = 在新窗口打开（与标签上的 ⧉ 等价）
     t.addEventListener('contextmenu', (ev) => {
       ev.preventDefault();
-      try { window.app.win.openScene(s.id); } catch (e) { /* ignore */ }
+      try { window.app.win.openScene(s.id); } catch (e) { /* ignore *\/ }
     });
     tabsNav.appendChild(t);
     return t;
@@ -111,7 +112,7 @@
       try {
         if (window.app.setSceneOrder) window.app.setSceneOrder(ids);
         else localStorage.setItem('scenarioTabOrder', JSON.stringify(ids));
-      } catch (e) { /* 存档失败不影响已经换好的位置 */ }
+      } catch (e) { /* 存档失败不影响已经换好的位置 *\/ }
     };
     // 迁移：老版本把顺序存在 localStorage，主进程还没有存档文件时搬一次过去（之后就只认主进程）
     Promise.resolve()
@@ -123,7 +124,7 @@
           if (!saved) persist(ls);
         });
       })
-      .catch(() => { /* ignore */ });
+      .catch(() => { /* ignore *\/ });
     u.initScenarioTabBar({ nav: tabsNav, persist, pinnedIds });
   });
 
@@ -135,7 +136,12 @@
         detachedScenes = new Set(ids);
         decorateDetachedTabs();
         if (currentTab && currentTab !== 'harness' && detachedScenes.has(currentTab) && forceLocalScene !== currentTab) {
-          loadScenario(currentTab).catch(() => { /* ignore */ });
+          loadScenario(currentTab).catch(() => { /* ignore *\/ });
         } else if (placeholderSceneId && placeholderSceneId === currentTab && !detachedScenes.has(placeholderSceneId)) {
           // 那个独立窗口关掉了 → 立刻把场景收回来原地显示（不用再点一次标签）
-          loadScenario(currentTab).catch(() => { /* ignore */ });
+          loadScenario(currentTab).catch(() => { /* ignore *\/ });
+
+
+`;
+if (false) { /* 仅为让语法检查通过；实际实现见 12-源码照搬/外壳/renderer/renderer.js */ }
+void SNIPPET;
