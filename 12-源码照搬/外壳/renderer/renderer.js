@@ -52,18 +52,7 @@ function hotReloadRenderers() {
     const css = document.querySelector('link[href*="styles.css"]');
     if (css) css.href = './styles.css?t=' + Date.now();
   } catch (e) { /* ignore */ }
-  // 板块数据（sector-data.js / us-sector-data.js）也热重载：
-  // 两文件已改 var 声明，重复加载不报错；renderers.js 在其后执行，能读到新数据
-  try {
-    ['sector-data.js', 'us-sector-data.js'].forEach(name => {
-      const old = document.querySelector('script[data-hr="' + name + '"]');
-      if (old) old.remove();
-      const s = document.createElement('script');
-      s.src = './' + name + '?t=' + Date.now();
-      s.dataset.hr = name;
-      document.head.appendChild(s);
-    });
-  } catch (e) { /* ignore */ }
+  // 2026-11-04：行情数据不随公开版发布，热加载已移除。
   return new Promise((resolve) => {
     const old = document.getElementById('renderers-script');
     if (old) old.remove();

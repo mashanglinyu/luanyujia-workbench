@@ -14,5 +14,8 @@
   "dependencies": {
     "electron-updater": "^6.8.9"
   },
-  "productName": "淋雨家的工作台"
+  "productName": "淋雨家的工作台",
+  "engines": {
+    "node": ">=18 <25"
+  }
 }

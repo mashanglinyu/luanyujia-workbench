@@ -4793,28 +4793,7 @@ const webAiServer = http.createServer(function (req, res) {
   json(404, { ok: false, err: '没有这个端点', endpoints: ['GET /webai/keys', 'GET /webai/state', 'GET /webai/who', 'POST /webai/ask {key,text,timeoutMs}'] });
 });
 webAiServer.on('error', function (e) { log('[webai] 桥服务起不来（端口 ' + WEB_AI_PORT + '）：' + e.message); });
-// ===== 自动更新挂载（官方 apps/desktop 能力搬迁 ② · 2026-09-26）=====
-// 独立模块 updater.js：未打包（源码直跑）时静默待命、默认不自动安装、全部错误吞掉 ⇒ 不影响现有使用。
-// 会话入口：node scripts\检查更新.mjs [state|check|install|config]
-let updaterHandle = null;
-try {
-  updaterHandle = require('./updater.js').install({ log: log });
-} catch (e) {
-  log('[updater] 挂载失败（已忽略，不影响使用）：' + (e && e.message ? e.message : String(e)));
-}
-
-// ===== 版本策略 / 强制更新挂载（官方 apps/desktop 能力搬迁 ④ 的另一半 · 2026-09-26）=====
-// 独立模块 scripts/mandatory-update.js：策略来自 data\version-policy.json；命中弹内联 HTML 模态提示窗。
-// ★ 刻意做成**软提示**（可"稍后"），只有策略显式 hardBlock 才不可关 —— 不锁工作台、不影响任何场景。
-// 会话入口：node scripts\强制更新.mjs [state|设 <最低版本> [--hard]|清]
-try {
-  require('./scripts/mandatory-update.js').install({
-    log: log,
-    checkNow: updaterHandle && typeof updaterHandle.checkNow === 'function' ? updaterHandle.checkNow : null,
-  });
-} catch (e) {
-  log('[强制更新] 挂载失败（已忽略，不影响使用）：' + (e && e.message ? e.message : String(e)));
-}
+// 2026-11-04：自动更新 / 强制更新模块不随公开版发布（文件已删除）。
 
 // ===== 原生浏览器侧栏挂载（官方 apps/desktop 能力搬迁 ③ · 2026-09-26）=====
 // 独立模块 scripts/sidebar.js：WebContentsView 贴到主窗口 contentView（官方 platform-view.ts 同款做法）。
