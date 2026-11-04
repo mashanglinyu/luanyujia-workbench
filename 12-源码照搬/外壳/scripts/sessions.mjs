@@ -298,7 +298,7 @@ if (rotating && !STRAY) {
       if (dry) say('\n--dry：以上都没执行。去掉 --dry 即真做。');
       else {
         // ③ token → cookie
-        const LOG = path.join(root, 'server.log');
+        const LOG = process.env.DSH_LOG || path.join(root, 'server.log');
         const BASE = process.env.DSH_GUI_BASE || 'http://127.0.0.1:3080';
         const toks = fs.existsSync(LOG)
           ? [...fs.readFileSync(LOG, 'utf8').matchAll(/dsh web:\s*http:\/\/127\.0\.0\.1:3080\/\?token=([A-Za-z0-9_\-]{16,})/g)].map((m) => m[1]).reverse()

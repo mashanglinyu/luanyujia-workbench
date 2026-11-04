@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="900" viewBox="0 0 1240 900" font-family="'Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a1420"/><stop offset="1" stop-color="#070b14"/></linearGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#1b2a3d" stroke-width="1"/></pattern>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#22d3ee"/></marker>
+    <marker id="arrGray" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#64748b"/></marker>
+  </defs>
+  <rect width="1240" height="900" fill="url(#bg)"/>
+  <rect width="1240" height="900" fill="url(#grid)" opacity="0.3"/>
+
+  <text x="56" y="52" fill="#22d3ee" font-size="12" letter-spacing="4">SINGLE-SCENE SELF-EVOLUTION · MINIMAL LOOP</text>
+  <text x="56" y="92" fill="#f8fafc" font-size="30" font-weight="800">单场景自我进化 · 一条最小闭环</text>
+  <text x="56" y="122" fill="#94a3b8" font-size="13">能跑的三件事：记忆生成 · 交接 · 归档　｜　留白的两件：自动归纳 · 验证闸（属成品版）</text>
+
+  <!-- 留白：自动归纳（右上，虚线云） -->
+  <g>
+    <path d="M1000 152 q-34 -26 0 -48 q30 -30 68 -12 q36 -20 58 9 q38 10 19 40 q-6 26 -40 23 q-46 19 -76 -2 q-34 2 -29 -10 z" fill="#0b1422" stroke="#64748b" stroke-dasharray="6 6"/>
+    <text x="1036" y="128" fill="#94a3b8" font-size="13">自动归纳</text>
+    <text x="1022" y="192" fill="#475569" font-size="11">留白 · 属成品版</text>
+  </g>
+
+  <!-- 场景1 大框 -->
+  <rect x="330" y="176" width="420" height="212" rx="12" fill="#101a2c" stroke="#22c55e" stroke-opacity="0.55"/>
+  <text x="354" y="204" fill="#86efac" font-size="12" letter-spacing="2">场景 1（= 一个工人）</text>
+  <rect x="354" y="218" width="184" height="68" rx="8" fill="#0b1422" stroke="#22d3ee" stroke-opacity="0.45"/>
+  <text x="370" y="246" fill="#e2e8f0" font-size="13" font-weight="700">场景私有记忆</text>
+  <text x="370" y="268" fill="#8fa3ba" font-size="11">含核心职责 · 人写</text>
+  <rect x="552" y="218" width="172" height="68" rx="8" fill="#0b1422" stroke="#8b5cf6" stroke-opacity="0.45"/>
+  <text x="568" y="246" fill="#e2e8f0" font-size="13" font-weight="700">定位卡</text>
+  <text x="568" y="268" fill="#8fa3ba" font-size="11">这场景管什么</text>
+  <rect x="354" y="300" width="184" height="68" rx="8" fill="#0b1422" stroke="#f59e0b" stroke-opacity="0.45"/>
+  <text x="370" y="328" fill="#e2e8f0" font-size="13" font-weight="700">私有技能</text>
+  <text x="370" y="350" fill="#8fa3ba" font-size="11">自动进化（留白）</text>
+  <rect x="552" y="300" width="172" height="68" rx="8" fill="#0b1422" stroke="#64748b" stroke-opacity="0.5"/>
+  <text x="568" y="328" fill="#e2e8f0" font-size="13" font-weight="700">场景画像</text>
+  <text x="568" y="350" fill="#8fa3ba" font-size="11">工具生成 · 不手改</text>
+
+  <!-- 会话 -->
+  <rect x="460" y="436" width="178" height="62" rx="10" fill="#141c2f" stroke="#38bdf8" stroke-opacity="0.6"/>
+  <text x="526" y="474" fill="#e2e8f0" font-size="16" font-weight="700">会话</text>
+
+  <!-- 项目信息 -->
+  <rect x="330" y="562" width="180" height="62" rx="10" fill="#0b1422" stroke="#22d3ee" stroke-opacity="0.35"/>
+  <text x="378" y="600" fill="#e2e8f0" font-size="14" font-weight="700">项目 1 信息</text>
+  <rect x="590" y="562" width="180" height="62" rx="10" fill="#0b1422" stroke="#22d3ee" stroke-opacity="0.35"/>
+  <text x="638" y="600" fill="#e2e8f0" font-size="14" font-weight="700">项目 2 信息</text>
+
+  <!-- 归档备份 -->
+  <rect x="56" y="286" width="214" height="146" rx="12" fill="#101a2c" stroke="#f59e0b" stroke-opacity="0.5"/>
+  <text x="80" y="314" fill="#fcd34d" font-size="12" letter-spacing="2">归档备份</text>
+  <rect x="80" y="330" width="166" height="58" rx="8" fill="#0b1422" stroke="#64748b" stroke-opacity="0.5"/>
+  <text x="96" y="364" fill="#e2e8f0" font-size="12.5" font-weight="700">历史会话 / 旧版记忆</text>
+  <text x="80" y="414" fill="#8fa3ba" font-size="11">只进不改 · 可回滚</text>
+
+  <!-- 留白：验证闸 -->
+  <polygon points="1012,424 1076,464 1012,504 948,464" fill="#0b1422" stroke="#64748b" stroke-dasharray="6 6"/>
+  <text x="984" y="470" fill="#94a3b8" font-size="13">验证闸</text>
+  <text x="956" y="532" fill="#475569" font-size="11">留白 · 属成品版</text>
+
+  <!-- 连线 -->
+  <line x1="549" y1="388" x2="549" y2="436" stroke="#22d3ee" stroke-width="1.4" marker-end="url(#arr)"/>
+  <line x1="460" y1="466" x2="272" y2="466" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrGray)"/>
+  <text x="300" y="458" fill="#64748b" font-size="11">当前交接</text>
+  <line x1="470" y1="498" x2="430" y2="562" stroke="#22d3ee" stroke-width="1.4" marker-end="url(#arr)"/>
+  <line x1="628" y1="498" x2="668" y2="562" stroke="#22d3ee" stroke-width="1.4" marker-end="url(#arr)"/>
+  <line x1="330" y1="594" x2="270" y2="540" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrGray)"/>
+  <line x1="770" y1="594" x2="948" y2="504" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrGray)"/>
+  <line x1="1012" y1="424" x2="752" y2="312" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrGray)"/>
+  <line x1="750" y1="216" x2="996" y2="150" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrGray)"/>
+
+  <!-- 三件事说明 -->
+  <g>
+    <rect x="56" y="664" width="1128" height="152" rx="12" fill="#0b1422" stroke="#22d3ee" stroke-opacity="0.3"/>
+    <text x="80" y="696" fill="#22d3ee" font-size="12" letter-spacing="2">能跑的三件事（公开版已带工具）</text>
+    <text x="80" y="726" fill="#b6c4d6" font-size="13">① 记忆生成：给场景建骨架 + 三份文档（私有记忆 / 身份卡 / 场景画像）+ 项目记忆</text>
+    <text x="80" y="752" fill="#b6c4d6" font-size="13">② 交接：归档旧版 → 覆盖写 §〇 四小节（进度 / 下一步 / 卡点 / 待办）→ 重生成卡与画像 → 登记索引</text>
+    <text x="80" y="778" fill="#b6c4d6" font-size="13">③ 归档：旧版进 <tspan fill="#fcd34d">归档\</tspan>，只进不改；索引只追加、不删别人的行</text>
+    <text x="80" y="802" fill="#64748b" font-size="11.5">判据只写原则、不写阈值；自动归纳 / 验证闸 / 技能自动进化的实现不随公开版发布。</text>
+  </g>
+
+  <text x="56" y="866" fill="#475569" font-size="11">本图只描述闭环与边界，不含实现 · 淋雨家的工作台 · 2026-11</text>
+</svg>

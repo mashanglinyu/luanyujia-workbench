@@ -52,7 +52,7 @@ say('工作区：' + (wsId ? '「' + wsTitle + '」 ' + wsId : '⚠ 没找到 ' 
 if (dry) { say('\n--dry：以上只是查了工作区，没有建会话。去掉 --dry 即真做。'); process.exit(0); }
 
 // ── token → 签名 cookie（必须 redirect:'manual'，跟随后反而 401）──
-const LOG = path.join(root, 'server.log');
+const LOG = process.env.DSH_LOG || path.join(root, 'server.log');
 const toks = fs.existsSync(LOG)
   ? [...fs.readFileSync(LOG, 'utf8').matchAll(/dsh web:\s*http:\/\/127\.0\.0\.1:3080\/\?token=([A-Za-z0-9_\-]{16,})/g)].map((m) => m[1]).reverse()
   : [];
