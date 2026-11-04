@@ -18,13 +18,25 @@
 
 | 检查 | 要求 | 不满足会怎样 |
 |---|---|---|
-| Node.js | **18+，< 25**（`engines` 已写进 `外壳\package.json`；`node -v` 能出版本） | `npm install` 直接报错 |
+| Node.js | **24.9+**（引擎 `engines.node >=24.9`；`外壳\package.json` 自己也写了 engines；`node -v` 能看到版本） | 引擎起不来或 `npm install` 报错 |
 | DSH 引擎 | 目录放在**本夹的 `引擎\`**（和 `外壳\` 同级，名字就叫「引擎」） | 启动后停在「引擎启动失败 100%」 |
 | 引擎版本 | **在 `0.2.1-rc.3` 上验证过**；更老/更新的引擎可能有接口差异 | 面板白屏、注入失败、顶栏状态异常 |
 | 端口 | `3083`（引擎）/ `31238`（界面）/ `31239`（网页版 AI 桥）没被别的程序占 | 白屏、一直重试、网页版 AI 不可用 |
 
 > 引擎不是这个仓库自带的——按 DSH 官方方式装好一份，然后**整个目录搬成 `12-源码照搬\引擎\`** 即可（`引擎\apps\cli\lib\bin.js` 存在就算对）。
 > 装完可先跑一遍自检：`node 外壳\scripts\自检.mjs`（检查 Node / 引擎目录 / 场景 json / 渲染文件，全绿再启动）。
+
+## 复制到你自己机器要改的地方（替换清单）
+
+这套模板里会出现三个占位写法，**照下表换成你自己的**；不换也能跑，但会指错地方：
+
+| 占位 | 意思 | 换法 |
+|---|---|---|
+| `<工作台>` | 你这套工作台的**根目录**（= 本夹 `12-源码照搬` 所在的那层） | 公开版脚本已改成**相对脚本自身解析**，一般不用改；老脚本里看到就换成真实路径 |
+| `<机主>` | 你自己的用户名 / 个人目录（个人资料、自我复盘的来源） | 换成你的目录；或设环境变量 `REVIEW_DIR` 指向你的自我复盘目录 |
+| `<盘根>` | 任意盘根（`D:`、`E:` 之类） | 换成你实际放数据的盘 |
+
+> 环境变量覆盖（可选）：`DSH_HARNESS_DIR`（引擎目录）、`DSH_HOME`（.dsh）、`DSH_GUI_BASE`（默认 http://127.0.0.1:3080）、`SITE_DIR`/`COMMUNITY_DIR`/`REVIEW_DIR`（三个静态根）。
 
 ## 快速开始
 
@@ -40,11 +52,18 @@ npm install
 cd ..
 双击 启动.vbs
 
-# 3) 给每个带 AI 的场景建会话
-node 外壳\scripts\建会话.mjs "命令"
-node 外壳\scripts\建会话.mjs "B站"
-node 外壳\scripts\建会话.mjs "自我复盘"
-node 外壳\scripts\建会话.mjs "本地电脑"
+# 3) 给每个带 AI 的场景建会话（--title 必填，标题要和工作台里显示的**逐字一致**）
+node 外壳\scripts\建会话.mjs --title "命令"
+node 外壳\scripts\建会话.mjs --title "B站"
+node 外壳\scripts\建会话.mjs --title "自我复盘"
+node 外壳\scripts\建会话.mjs --title "本地电脑"
+
+# 4) 把打印出来的 sessionId 写回场景配置（省掉"插了会话但面板不认"的坑）
+#    打开 外壳\scenarios\<场景>.json，把该面板的
+#      "sessionId": "", "sessionTitle": ""
+#    改成
+#      "sessionId": "<上一步最后一行输出>", "sessionTitle": "<与 --title 完全一致的标题>"
+# 5) 自检
 node 外壳\scripts\sessions.mjs --check
 ```
 
@@ -84,7 +103,7 @@ node 外壳\scripts\sessions.mjs --check
 |---|---|---|
 | 启动后「引擎启动失败 100%」 | `引擎\` 不存在或路径不对 | 确认 `引擎\apps\cli\lib\bin.js` 存在；缺了就把装好的 DSH 引擎整个搬过来 |
 | 界面白屏 / 一直重试 | 端口被占用（常见：同时开了两个壳） | 关掉另一个实例，或先杀 3083/31238 端口上的进程再启动 |
-| `npm install` 卡住/报错 | 网络或 Node 版本太低 | 换国内镜像 `npm config set registry https://registry.npmmirror.com`；Node 升到 18+ |
+| `npm install` 卡住/报错 | 网络或 Node 版本太低 | 换国内镜像 `npm config set registry https://registry.npmmirror.com`；Node 升到 **24.9+** |
 | 场景标签点开是空的 | 还没给场景建会话 | `node 外壳\scripts\建会话.mjs "命令"`（其它场景同理），再点顶栏 ⟳ |
 | 右侧 AI 面板「未连接」 | 没配模型/账号 | 点右上角「登录」或填 API Key（保存在本地） |
 | 想换端口 | 默认 3083 / 31238 | 改 `外壳\main.js` 顶部 `DSH_PORT` / `SITE_PORT`，两个都改 |

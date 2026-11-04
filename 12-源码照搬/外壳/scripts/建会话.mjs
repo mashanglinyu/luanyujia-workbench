@@ -19,19 +19,21 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const HARNESS_DIR = process.env.DSH_HARNESS_DIR || '<工作台>\\引擎';
+const shellDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const root = shellDir;                                        // 外壳
+const PROJECT = path.resolve(shellDir, '..');                  // 12-源码照搬
+const HARNESS_DIR = process.env.DSH_HARNESS_DIR || path.join(PROJECT, '引擎');
 const DSH_HOME = process.env.DSH_HOME || path.join(HARNESS_DIR, '.dsh');
-const BASE = process.env.DSH_GUI_BASE || 'http://127.0.0.1:3080';
+const BASE = process.env.DSH_GUI_BASE || 'http://127.0.0.1:3080';   // 不在 3080 时用 --base 或 DSH_GUI_BASE
 
 const argv = process.argv.slice(2);
 const val = (k, d) => { const i = argv.indexOf(k); return i >= 0 && argv[i + 1] ? argv[i + 1] : d; };
 const title = val('--title', '');
-const cwd = val('--cwd', '<工作台>\\工作区');   // 2026-10-16 起默认新工作区（口径：说明\默认工作区.md）
+const cwd = val('--cwd', path.join(PROJECT, '工作区'));   // 默认 <本夹>\工作区
 const dry = argv.includes('--dry');
 const seedIt = !argv.includes('--no-seed');
 
-if (!title) { console.error('用法：node scripts\\建会话.mjs --title "会话名" [--cwd "<工作台>\\工作区"] [--no-seed] [--dry]'); process.exit(2); }
+if (!title) { console.error('用法：node 外壳\\scripts\\建会话.mjs --title "会话名" [--cwd "<本夹>\\工作区"] [--no-seed] [--dry]'); process.exit(2); }
 const say = (s) => console.log(s);
 const die = (s) => { console.error('✗ ' + s); process.exit(1); };
 

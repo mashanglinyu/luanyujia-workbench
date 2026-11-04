@@ -16,11 +16,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const HARNESS_DIR = process.env.DSH_HARNESS_DIR || '<工作台>\\引擎';
+const PROJECT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const HARNESS_DIR = process.env.DSH_HARNESS_DIR || path.join(PROJECT, '引擎');
 const DSH_HOME = process.env.DSH_HOME || path.join(HARNESS_DIR, '.dsh');
 // 2026-10-16：默认工作区改成真目录（口径：说明\默认工作区.md）。⛔ 必须放**模块顶层** ——
 //   轮换(L257 附近)与 --stray(L544 附近)在**别的函数里**引用它们，放函数内会 ReferenceError（当天真踩过）。
-const DEFAULT_CWD = '<工作台>\\工作区';
+const DEFAULT_CWD = path.join(PROJECT, '工作区');
 const KEEP_CWD = process.argv.includes('--keep-cwd');
 
 function readJson(p) {
@@ -67,7 +68,7 @@ function listSessions() {
 //     两条叠加 ⇒ 把 139k/140k 的健康会话（实际 17%）标成 ⚠。**判据两处各算一套，就是虚警的来源。**
 //   ⇒ 现在只读 ctx.mjs 算好的 pct / win / line / projected，自己**不再算一条线**；读不到就干脆不标（宁可不报，
 //     也不用过期口径吓人）。
-const CTX_JS = path.join('<工作台>\\引擎', '.dsh', 'skills', 'context-overflow', 'ctx.mjs');
+const CTX_JS = path.join(HARNESS_DIR, '.dsh', 'skills', 'context-overflow', 'ctx.mjs');
 const CTX = (() => {
   try {
     const out = execFileSync(process.execPath, [CTX_JS, '--json', '--all'], { encoding: 'utf8', maxBuffer: 1 << 26, timeout: 60000 });
@@ -501,7 +502,7 @@ if (rotating && STRAY) {
 
   // ★2026-10-13★ 旧根 `<工作台>\引擎\场景记忆` 已搬到 `<工作台>\引擎\场景记忆`（旧根已删）。
   //   这里是**转义写法**，搬家的文本扫描匹配不到 ⇒ 漏改；不改的话零散会话交接会写进已删的旧目录。
-  const STRAY_DIR = '<工作台>\\引擎\\场景记忆\\其他会话临时项目信息交接文档';
+  const STRAY_DIR = path.join(HARNESS_DIR, '场景记忆', '其他会话临时项目信息交接文档');
   const baseOf = (t) => String(t || '')
     .replace(/^已归档\s*·\s*/, '')
     .replace(/\s*·\s*\d{4}-\d{2}-\d{2}\s*$/, '')

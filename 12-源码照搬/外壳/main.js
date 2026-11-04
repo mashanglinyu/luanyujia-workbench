@@ -50,12 +50,12 @@ rotateLog();
 const SCENARIOS_DIR = path.join(__dirname, 'scenarios');
 
 // ---- 个人站场景：官网静态服务（<工作台> → http://127.0.0.1:SITE_PORT）----
-const SITE_DIR = '<工作台>';
+const SITE_DIR = process.env.SITE_DIR || path.resolve(__dirname, '..');   // 公开版：默认 = 本夹根（12-源码照搬）
 // 2026-10-22：第二个预览源——DSH 社区站（本地目录，静态服务用 /__community/ 前缀直出，
 // 不跟官网同根，免得社区站的源码被当成官网页面发布出去）
-const COMMUNITY_DIR = '<工作台>';
+const COMMUNITY_DIR = process.env.COMMUNITY_DIR || path.resolve(__dirname, '..');
 // 2026-10-22：个人站场景「本地文件」面板的浏览根 = 项目工程总目录（原来写死成官网目录）
-const SITE_BROWSE_DIR = '<工作台>';
+const SITE_BROWSE_DIR = process.env.SITE_BROWSE_DIR || path.resolve(__dirname, '..');
 const SITE_PORT = 31238;
 let siteServer = null;
 
@@ -1470,7 +1470,7 @@ ipcMain.handle('site:open-file', async (e, relPath) => {
 // 为什么必须走主进程：渲染进程是 file:// 页面，fetch/XHR 读不了本地文件（图/视频能当子资源加载，
 // 文本不能），所以目录列表与正文都由这里读盘；路径一律相对 REVIEW_DIR 解析并夹在本目录内。
 // 只读：镜像是「<机主>-个人信息 / 我的知识库」的副本（技能 maben-profile 的默认只读约束），不提供任何写接口。
-const REVIEW_DIR = '<工作台>\\自我复盘';
+const REVIEW_DIR = process.env.REVIEW_DIR || path.resolve(__dirname, '..', '自我复盘');
 const REVIEW_TEXT_EXT = /\.(md|markdown|txt|json|ya?ml|csv|log|ini|conf)$/i;
 const REVIEW_MAX_BYTES = 4 * 1024 * 1024;   // 单篇上限 4 MB：超了只回前 4 MB，够看且不会把面板卡死
 
