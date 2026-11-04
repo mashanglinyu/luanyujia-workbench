@@ -3,6 +3,7 @@
  */
 (function () {
   var LINKS = [
+    ['btn-site', 'https://linyujia.me/'],
     ['btn-market', 'https://www.mydsh.xyz/'],
     ['btn-donate', 'https://linyujia.me/#donate'],
   ];
