@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="300" viewBox="0 0 1240 300" font-family="'Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a1420"/><stop offset="1" stop-color="#070b14"/></linearGradient>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#22d3ee"/></marker>
+  </defs>
+  <rect width="1240" height="300" fill="url(#bg)"/>
+  <text x="48" y="46" fill="#22d3ee" font-size="11" letter-spacing="4">MESSAGE &amp; DELIVERY · NINE LINKS</text>
+  <text x="48" y="84" fill="#f8fafc" font-size="26" font-weight="800">一条消息的九个环</text>
+  <text x="48" y="112" fill="#94a3b8" font-size="12.5">从「有人说了一句话」到「这件事真的办完并被记住」——断在哪一环，消息就死在哪一环</text>
+
+  <!-- 9 cards in one row: x=48, step 128, width 112 -->
+  <g>
+    <g><rect x="48" y="150" width="112" height="72" rx="9" fill="#0f1a2b" stroke="#22c55e" stroke-opacity=".65"/><text x="62" y="172" fill="#86efac" font-size="10">01</text><text x="62" y="196" fill="#e2e8f0" font-size="14" font-weight="700">产生</text></g>
+    <g><rect x="176" y="150" width="112" height="72" rx="9" fill="#0f1a2b" stroke="#22c55e" stroke-opacity=".65"/><text x="190" y="172" fill="#86efac" font-size="10">02</text><text x="190" y="196" fill="#e2e8f0" font-size="14" font-weight="700">存储</text></g>
+    <g><rect x="304" y="150" width="112" height="72" rx="9" fill="#0f1a2b" stroke="#22d3ee" stroke-opacity=".65"/><text x="318" y="172" fill="#67e8f9" font-size="10">03</text><text x="318" y="196" fill="#e2e8f0" font-size="14" font-weight="700">推送</text></g>
+    <g><rect x="432" y="150" width="112" height="72" rx="9" fill="#0f1a2b" stroke="#22d3ee" stroke-opacity=".65"/><text x="446" y="172" fill="#67e8f9" font-size="10">04</text><text x="446" y="196" fill="#e2e8f0" font-size="14" font-weight="700">预读</text></g>
+    <g><rect x="560" y="150" width="112" height="72" rx="9" fill="#0f1a2b" stroke="#f59e0b" stroke-opacity=".7"/><text x="574" y="172" fill="#fcd34d" font-size="10">05</text><text x="574" y="196" fill="#e2e8f0" font-size="14" font-weight="700">消费</text></g>
+    <g><rect x="688" y="150" width="112" height="72" rx="9" fill="#0f1a2b" stroke="#f59e0b" stroke-opacity=".7"/><text x="702" y="172" fill="#fcd34d" font-size="10">06</text><text x="702" y="196" fill="#e2e8f0" font-size="14" font-weight="700">回执</text></g>
+    <g><rect x="816" y="150" width="112" height="72" rx="9" fill="#0f1a2b" stroke="#8b5cf6" stroke-opacity=".65"/><text x="830" y="172" fill="#c4b5fd" font-size="10">07</text><text x="830" y="196" fill="#e2e8f0" font-size="14" font-weight="700">归档</text></g>
+    <g><rect x="944" y="150" width="112" height="72" rx="9" fill="#0f1a2b" stroke="#8b5cf6" stroke-opacity=".65"/><text x="958" y="172" fill="#c4b5fd" font-size="10">08</text><text x="958" y="196" fill="#e2e8f0" font-size="14" font-weight="700">对账</text></g>
+    <g><rect x="1072" y="150" width="112" height="72" rx="9" fill="#0b1422" stroke="#64748b" stroke-dasharray="5 5"/><text x="1086" y="172" fill="#94a3b8" font-size="10">09</text><text x="1086" y="196" fill="#cbd5e1" font-size="14" font-weight="700">进化</text></g>
+  </g>
+
+  <g stroke="#22d3ee" stroke-width="1.2" opacity=".8">
+    <line x1="160" y1="186" x2="174" y2="186" marker-end="url(#a)"/>
+    <line x1="288" y1="186" x2="302" y2="186" marker-end="url(#a)"/>
+    <line x1="416" y1="186" x2="430" y2="186" marker-end="url(#a)"/>
+    <line x1="544" y1="186" x2="558" y2="186" marker-end="url(#a)"/>
+    <line x1="672" y1="186" x2="686" y2="186" marker-end="url(#a)"/>
+    <line x1="800" y1="186" x2="814" y2="186" marker-end="url(#a)"/>
+    <line x1="928" y1="186" x2="942" y2="186" marker-end="url(#a)"/>
+  </g>
+
+  <text x="48" y="262" fill="#64748b" font-size="11.5">前六环决定「消息有没有死」；后三环决定「这件事有没有被记住、有没有让下次更好」。</text>
+  <text x="48" y="284" fill="#3f4a5a" font-size="10.5">只画环与顺序，不含工具、阈值与实现 · 淋雨家的工作台 · 2026-11</text>
+</svg>
